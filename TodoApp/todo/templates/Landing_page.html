@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+
+{% load static %}
+
+<body>
+    <div class="container px-4 py-5 mx-auto">
+        <div class="card card0">
+            <div class="d-flex flex-lg-row flex-column-reverse">
+                <div class="card card2">
+                    <img src="{% static 'Landing_page.png' %}" alt="Landing_image" style= "width: 80%; height: 300px; margin: auto;">
+                </div>
+                <div class="card card1">
+                    <div class="d-flex flex-column"> <img src="{% static 'Logo_todoApp.png' %}" height="50" width="50" />
+                        <span class="name">TodoApp</span> </div>
+                    <div class="row justify-content-center my-auto">
+                        <div class="col-lg-8 my-5">
+                            <h3 class="mb-3">Welcome to Your TodoApp</h3>
+                            <small class="text-muted">A Place you can make you day a productive one<br>Just in a few
+                                steps</small>
+
+                            <div class="row justify-content-center my-3">
+                                <button class="btn btn-gray"><a href="login">Get Started</a></button>
+                            </div>
+                            <div class="row justify-content-center my-2">
+                                <small class="text-muted">  Looking foward to having you<br>Enjoy
+                                    You</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>Landing page</title>
+    <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'>
+    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <link rel="stylesheet" type="text/css" href="{% static '/css/Landing_page.css' %}">
+</head>

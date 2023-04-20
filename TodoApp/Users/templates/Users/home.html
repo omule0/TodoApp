@@ -1,0 +1,183 @@
+<link href="https://unpkg.com/@webpixels/css/dist/index.css" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+  rel="stylesheet"
+/>
+  <!--  jQuery for the AJAX and event handling -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+<div class="d-flex flex-column flex-lg-row h-lg-full bg-gray-100">
+  <!-- Vertical Navbar -->
+  <nav class="navbar show navbar-vertical h-lg-screen navbar-expand-lg px-0 py-3 py-lg-0 navbar-light bg-light border-end-lg" id="navbarVertical">
+    <div class="container-fluid">
+      <!-- Toggler -->
+      <!-- menu button -->
+      <button class="navbar-toggler ms-n2" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarCollapse" aria-controls="sidebarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- Brand -->
+      <a class="navbar-brand py-lg-5 mb-lg-5 px-lg-6 me-0" href="#">
+        <img src="Logo_todoApp.png" alt="TodoApp">
+        <span class="name">TodoApp</span>
+      </a>
+      <!-- User menu (mobile) -->
+      <div class="navbar-user d-lg-none">
+        <!-- Dropdown -->
+        <div class="dropdown">
+          <!-- Toggle -->
+          <!-- Avatar -->
+          <a href="#" id="sidebarAvatar" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div class="avatar bg-warning rounded-circle text-white">
+              <img alt="Avatar" src=''>
+            </div>
+          </a>
+        </div>
+      </div>
+      <!-- Collapse -->
+      <div class="collapse navbar-collapse" id="sidebarCollapse">
+        <!-- Navigation -->
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="fas fa-angles-right"></i>
+              <i class="bi bi-house"></i> Upcoming 
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="fas fa-list-check"></i>
+              <i class="bi bi-bar-chart"></i> Today
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="fas fa-message"></i>
+              <i class="bi bi-chat"></i> Messages 
+              <span class="badge bg-opacity-30 bg-primary text-primary rounded-pill d-inline-flex align-items-center ms-auto">0</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="fas fa-calendar"></i>
+              <i class="bi bi-bookmarks"></i> Calendars 
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="far fa-note-sticky"></i>
+              <i class="bi bi-people"></i> Sticky Wall
+            </a>
+          </li>
+        </ul>
+        <!-- Divider -->
+        <hr class="navbar-divider my-5 opacity-20">
+        <!-- Navigation -->
+        <ul class="navbar-nav mb-md-4">
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="far fa-rectangle-list"></i>
+              <i class="bi bi-gear"></i> Lists 
+            </a>
+          </li>
+        </ul>
+        <!-- Push content down -->
+        <div class="mt-auto"></div>
+        <!-- User (md) -->
+        <ul class="navbar-nav mb-5">
+          <li class="nav-item">
+            <a class="nav-link" href="#account">
+              <i class="fas fa-user-check"></i>
+              <i class="bi bi-person-square"></i> Account
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="fas fa-right-from-bracket"></i>
+              <i class="bi bi-box-arrow-left"></i> Logout
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- Main content -->
+  <div class="h-screen px-3 px-lg-7 flex-grow-1 overflow-y-lg-auto"id='content'>
+    <header class="bg-surface-secondary border-top">
+      <div class="container-xl">
+        <div class="py-5 border-bottom">
+          <!-- Page heading -->
+          <div class="content">
+            <div class="row align-items-center">
+              <div class="col-md-6 col-12 mb-3 mb-md-0">
+                <!-- Title -->
+                <h1 class="h2 mb-0 ls-tight">Todos</h1>
+              </div>
+              <!-- Actions -->
+              <div class="col-md-6 col-12 text-md-end">
+                <div class="mx-n1">
+                  <a href="#" class="btn d-inline-flex btn-sm btn-neutral mx-1">
+                    <span class=" pe-2">
+                      <i class="bi bi-pencil"></i>
+                    </span>
+                    <span>Edit</span>
+                  </a>
+                  <a href="#" class="btn d-inline-flex btn-sm btn-primary mx-1">
+                    <span class=" pe-2">
+                      <i class="bi bi-plus"></i>
+                    </span>
+                    <span>Create</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="py-10 bg-surface-secondary">
+      <!-- Container -->
+      <div class="container-xl">
+        <div class="border border-2 bg-surface-secondary h-full border-dashed rounded d-flex flex-column justify-content-center align-items-center" style="min-height: 400px;">
+          <div class="display-4 font-semibold text-muted opacity-50">
+            <!-- <i class="bi bi-files-alt"></i> -->
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<style>
+    .name {
+  font-size: 20px;
+  font-weight: bold;
+}
+</style>
+
+<script>
+  $(document).ready(function () {
+      // Listen for clicks on sidebar links
+      $('.sidebar a').click(function (e) {
+          e.preventDefault(); // Prevent default link behavior
+          var url = $(this).attr('href'); // Get link URL
+          $('.content').load(url + '.html'); // Load content via AJAX
+          window.location.hash = url; // Update URL hash
+      });
+
+      // Listen for changes to URL hash
+      $(window).on('hashchange', function () {
+          var url = window.location.hash.slice(1); // Get hash value
+          $('.content').load(url + '.html'); // Load content via AJAX
+          location.reload(); // Reload the page
+      });
+
+      // Load initial content based on URL hash
+      var initialHash = window.location.hash.slice(1);
+      if (initialHash !== '') {
+          $('.content').load(initialHash + '.html');
+      }
+  });
+</script>

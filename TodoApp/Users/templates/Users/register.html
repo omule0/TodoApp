@@ -1,0 +1,40 @@
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="card bg-light">
+    <article class="card-body mx-auto" style="max-width: 400px;">
+        <h3 style="text-align: center">Get started to organize your tasks accordingly with Awesome TodoApp!!</h3>
+        <h4 class="card-title mt-3 text-center">Create Account</h4>
+        <form method="post">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Join Today</legend>
+                {{ form|crispy }}
+                {% if status %}
+                <div class="alert alert-danger mt-3">
+                    {{ status }}
+                </div>
+                {% endif %}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">
+                    Sign Up
+                </button>
+            </div>
+            <div class="border-top pt-3">
+                <small class="text-muted">
+                    Already have an account?
+                    <a class='ml-2' href="{% url 'login' %}">Sign In</a>
+                </small>
+            </div>
+        </form>
+    </article>
+</div>
+{% endblock content %}
