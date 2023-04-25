@@ -64,7 +64,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" id="sticky_notes">
+            <a class="nav-link" href="sticky_notes">
               <i class="far fa-note-sticky"></i>
               <i class="bi bi-people"></i> Sticky Wall
             </a>
@@ -225,30 +225,12 @@
 </script>
 
 <script>
-  $(document).ready(function () {
-    $("#sticky_notes").click(function () {
-      $.ajax({
-        url: "/home/sticky_notes/",
-        success: function (data) {
-          $("#content-container").html(data);
-        },
-      });
-    });
-    $("#account-link").click(function () {
-      $.ajax({
-        url: "/path/to/account/view/",
-        success: function (data) {
-          $("#content-container").html(data);
-        },
-      });
-    });
-  });
 </script>
 
 <head>
   <link rel="stylesheet" type="text/css" href="{% static '/css/add_task.css' %}">
-  <!-- webpixels Bootstrap -->
-  <link href="https://unpkg.com/@webpixels/css/dist/index.css" rel="stylesheet" />
+  <!-- webpixels Bootstrap --><link href="https://unpkg.com/@webpixels/css/dist/index.css" rel="stylesheet" />
+  
 
   <!-- Font Awesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />

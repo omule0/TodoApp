@@ -50,16 +50,42 @@
       }
     </style>
   </head>
-
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <title>Sticky Notes</title>
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  </head>
   <body>
-    <div>
-      <h1>Sticky Notes</h1>
-      <h4>Note down your tasks will on the Go</h4>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <h1 class="text-center">Sticky Notes</h1>
+          <h4 class="text-center">Note down your tasks on the go</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div id="app" class="text-center">
+            <button class="btn btn-primary add-note" type="button">Add Note</button>
+          </div>
+        </div>
+      </div>
     </div>
-    <div id="app">
-      <button class="add-note" type="button">+</button>
-    </div>
+    <!-- Add jQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        $('.add-note').click(function(event) {
+          event.preventDefault(); // Prevent the button from submitting the form
+          // Add your code to add a new note here
+        });
+      });
+    </script>
   </body>
+  </html>
 
   <script>
     const notesContainer = document.getElementById("app");

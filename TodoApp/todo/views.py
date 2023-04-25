@@ -27,12 +27,12 @@ def home(request):
     tasks = Task.objects.all()
     return render(request, 'home.html', {'tasks': tasks, 'form': form})
 
-
 @login_required
 def sticky_notes(request):
-    if request.is_ajax():
-        return render(request, "sticky_notes.html")
+    return render(request, 'sticky_notes.html')
 
+
+@login_required
 def add_task(request):
     if request.method == 'POST':
         form = TaskForm(request.POST)
@@ -44,4 +44,3 @@ def add_task(request):
                 'due_time': task.due_time.strftime('%H:%M:%S') if task.due_time else '',
             })
     return JsonResponse({'error': 'Invalid request'})
-
