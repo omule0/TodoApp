@@ -1,26 +1,37 @@
-<link href="https://unpkg.com/@webpixels/css/dist/index.css" rel="stylesheet">
+<!doctype html>
+<html>
+{% load static %}
 
-<!-- Font Awesome -->
-<link
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-  rel="stylesheet"
-/>
-  <!--  jQuery for the AJAX and event handling -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<head>
+  <link rel="stylesheet" type="text/css" href="{% static '/css/add_task.css' %}">
+  <script src="{% static 'js/add_task.js' %}"></script>
+</head>
+
 
 
 <div class="d-flex flex-column flex-lg-row h-lg-full bg-gray-100">
   <!-- Vertical Navbar -->
-  <nav class="navbar show navbar-vertical h-lg-screen navbar-expand-lg px-0 py-3 py-lg-0 navbar-light bg-light border-end-lg" id="navbarVertical">
+  <nav
+    class="navbar show navbar-vertical h-lg-screen navbar-expand-lg px-0 py-3 py-lg-0 navbar-light bg-light border-end-lg"
+    id="navbarVertical"
+  >
     <div class="container-fluid">
       <!-- Toggler -->
       <!-- menu button -->
-      <button class="navbar-toggler ms-n2" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarCollapse" aria-controls="sidebarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <button
+        class="navbar-toggler ms-n2"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#sidebarCollapse"
+        aria-controls="sidebarCollapse"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
         <span class="navbar-toggler-icon"></span>
       </button>
       <!-- Brand -->
       <a class="navbar-brand py-lg-5 mb-lg-5 px-lg-6 me-0" href="#">
-        <img src="Logo_todoApp.png" alt="TodoApp">
+        <img src="Logo_todoApp.png" alt="TodoApp" />
         <span class="name">TodoApp</span>
       </a>
       <!-- User menu (mobile) -->
@@ -29,9 +40,16 @@
         <div class="dropdown">
           <!-- Toggle -->
           <!-- Avatar -->
-          <a href="#" id="sidebarAvatar" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a
+            href="#"
+            id="sidebarAvatar"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
             <div class="avatar bg-warning rounded-circle text-white">
-              <img alt="Avatar" src=''>
+              <img alt="Avatar" src="" />
             </div>
           </a>
         </div>
@@ -43,11 +61,11 @@
           <li class="nav-item">
             <a class="nav-link" href="#">
               <i class="fas fa-angles-right"></i>
-              <i class="bi bi-house"></i> Upcoming 
+              <i class="bi bi-house"></i> Upcoming
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="task_list">
               <i class="fas fa-list-check"></i>
               <i class="bi bi-bar-chart"></i> Today
             </a>
@@ -55,31 +73,34 @@
           <li class="nav-item">
             <a class="nav-link" href="#">
               <i class="fas fa-message"></i>
-              <i class="bi bi-chat"></i> Messages 
-              <span class="badge bg-opacity-30 bg-primary text-primary rounded-pill d-inline-flex align-items-center ms-auto">0</span>
+              <i class="bi bi-chat"></i> Messages
+              <span
+                class="badge bg-opacity-30 bg-primary text-primary rounded-pill d-inline-flex align-items-center ms-auto"
+                >0</span
+              >
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
               <i class="fas fa-calendar"></i>
-              <i class="bi bi-bookmarks"></i> Calendars 
+              <i class="bi bi-bookmarks"></i> Calendars
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#"id='sticky_notes'>
+            <a class="nav-link" href="#" id="sticky_notes">
               <i class="far fa-note-sticky"></i>
               <i class="bi bi-people"></i> Sticky Wall
             </a>
           </li>
         </ul>
         <!-- Divider -->
-        <hr class="navbar-divider my-5 opacity-20">
+        <hr class="navbar-divider my-5 opacity-20" />
         <!-- Navigation -->
         <ul class="navbar-nav mb-md-4">
           <li class="nav-item">
             <a class="nav-link" href="#">
               <i class="far fa-rectangle-list"></i>
-              <i class="bi bi-gear"></i> Lists 
+              <i class="bi bi-gear"></i> Lists
             </a>
           </li>
         </ul>
@@ -104,78 +125,146 @@
     </div>
   </nav>
   <!-- Main content -->
-    <div class="h-screen px-3 px-lg-7 flex-grow-1 overflow-y-lg-auto" id='content-container'>
-      <header class="bg-surface-secondary border-top">
-        <div class="container-xl">
-          <div class="py-5 border-bottom">
-            <!-- Page heading -->
-            <div class="content">
-              <div class="row align-items-center">
-                <div class="col-md-6 col-12 mb-3 mb-md-0">
-                  <!-- Title -->
-                  <h1 class="h2 mb-0 ls-tight">Todos</h1>
-                </div>
-                <!-- Actions -->
-                <div class="col-md-6 col-12 text-md-end">
-                  <div class="mx-n1">
-                    <a href="#" class="btn d-inline-flex btn-sm btn-neutral mx-1">
-                      <span class=" pe-2">
-                        <i class="bi bi-pencil"></i>
-                      </span>
-                      <span>Edit</span>
-                    </a>
-                    <a href="#" class="btn d-inline-flex btn-sm btn-primary mx-1">
-                      <span class=" pe-2">
-                        <i class="bi bi-plus"></i>
-                      </span>
-                      <span>Create</span>
-                    </a>
-                  </div>
-                </div>
+  <div class="h-screen flex-grow-1 overflow-y-lg-auto" id="content-container">
+    <header class="bg-surface-primary border-bottom pt-6">
+      <div class="container-fluid">
+        <div class="mb-npx">
+          <div class="row align-items-center">
+            <div class="col-sm-6 col-12 mb-4 mb-sm-0">
+              <!-- Title -->
+              <h6 class="h2 mb-0 ls-tight">
+                <i class="far fa-sun"></i> My Day
+              </h6>
+              <p id="watch"></p>
+            </div>
+            <!-- Actions -->
+            <!-- 
+              <div class="col-sm-6 col-12 text-sm-end">
+              <div class="mx-n1">
+                <a href="#" class="btn btn-outline-primary btn-sm mx-1">
+                  <span class="pe-2">
+                    <i class="bi bi-plus"></i>
+                  </span>
+                  <span>Add Task</span>
+                </a>
               </div>
             </div>
-          </div>
-        </div>
-    </header>
-    <main class="py-10 bg-surface-secondary">
-      <!-- Container -->
-      <div class="container-xl">
-        <div class="border border-2 bg-surface-secondary h-full border-dashed rounded d-flex flex-column justify-content-center align-items-center" style="min-height: 400px;">
-          <div class="display-4 font-semibold text-muted opacity-50">
-            <!-- <i class="bi bi-files-alt"></i> -->
+            -->
           </div>
         </div>
       </div>
+    </header>
+    <!-- Main -->
+    {% block content %}
+    <main class="py-10 bg-surface-secondary">
+      <div class="container-fluid">
+        <div class="card mb-7">
+          <div class="card-header">
+            <h5 class="mb-0">Add Tasks</h5>
+          </div>
+          <div class="card-header">
+            {% load crispy_forms_tags %}
+            <form method="POST" id="addTaskForm">
+              {% csrf_token %}
+              {% crispy form %}
+            </form>
+          </div>
+        </div>
+        <div class="card mb-7">
+          <div class="card-header">
+            <h5 class="mb-0">Tasks</h5>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-hover table-nowrap">
+              <thead thead class="table-light">
+                <tr>
+                  <th scope="col">Task Name</th>
+                  <th scope="col">Due Date</th>
+                  <th scope="col">Due Time</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="taskTableBody">
+                {% for task in tasks %}
+                <tr>
+                  <td>{{ task.name }}</td>
+                  <td>{{ task.due_date }}</td>
+                  <td>{{ task.due_time }}</td>
+                  <td>
+                    <a href="#" class="btn btn-sm btn-neutral">View</a>
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-square btn-neutral text-danger-hover"
+                    >
+                      <i class="bi bi-trash">Edit</i>
+                    </button>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      
     </main>
+    {% endblock content %}
   </div>
 </div>
 
-<style>
-    .name {
-  font-size: 20px;
-  font-weight: bold;
-}
-</style>
 
 <script>
-  $(document).ready(function() {
-    $("#sticky_notes").click(function() {
-      $.ajax({
-        url: "/home/sticky_notes/",
-        success: function(data) {
-          $("#content-container").html(data);
-        }
-      });
+  const addTaskForm = document.getElementById("addTaskForm");
+  const taskTableBody = document.getElementById("taskTableBody");
+
+  addTaskForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const formData = new FormData(addTaskForm);
+    const response = await fetch("/add_task/", {
+      method: "POST",
+      body: formData,
     });
-  
-    $("#account-link").click(function() {
-      $.ajax({
-        url: "/path/to/account/view/",
-        success: function(data) {
-          $("#content-container").html(data);
-        }
-      });
-    });
+    const task = await response.json();
+    const taskRow = `
+      <tr>
+        <td>${task.name}</td>
+        <td>${task.due_date}</td>
+        <td>${task.due_time}</td>
+      </tr>
+    `;
+    taskTableBody.insertAdjacentHTML("beforeend", taskRow);
+    addTaskForm.reset();
   });
-  
 </script>
+
+
+<script>
+  function callDateTime() {
+    var currentDate = new Date().toDateString();
+    var currentTime = new Date().toLocaleTimeString();
+    document.getElementById(
+      "watch"
+    ).innerHTML = `${currentDate}-${currentTime}`;
+  }
+  setInterval(function () {
+    callDateTime();
+  }, 1000);
+</script>
+
+
+<!-- webpixels Bootstrap -->
+<link href="https://unpkg.com/@webpixels/css/dist/index.css" rel="stylesheet" />
+
+<!-- Font Awesome -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"rel="stylesheet"/>
+<link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+
+<!--  jQuery for the AJAX and event handling -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Bootstrap JavaScript -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"integrity="sha512-9V9D+hzIJe8J7m26zvJZm7wZzg4+VYoo4lJ/2c7yJ4RZ8G6JnT6B3TzNwT6o4eV4TVs0Q0X9uB+zRYSdc6WuUg=="crossorigin="anonymous"referrerpolicy="no-referrer"/>
+

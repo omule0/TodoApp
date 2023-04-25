@@ -1,0 +1,128 @@
+/* Style for the input field */
+.custom-input {
+    border: none;
+    border-bottom: 2px solid #ccc;
+    padding: 10px;
+    font-size: 16px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+/* Style for the "Add Task" button */
+.add-task-btn {
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    color: #fff;
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+.add-task-btn:hover {
+    background-color: #0069d9;
+    cursor: pointer;
+}
+
+/* Style for the dropdown menus */
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+    color: #212529;
+}
+
+.dropdown-divider {
+    margin: 0;
+}
+
+.task-item {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.task-text {
+    font-size: 18px;
+}
+
+.task-buttons {
+    display: flex;
+    align-items: center;
+}
+
+.task-buttons button {
+    margin-left: 5px;
+}
+
+.task-item {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.task-name {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.due-date {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.due-date i {
+    margin-right: 5px;
+}
+
+.tasks-stamp {
+    font-size: 12px;
+    color: #999;
+    margin-left: auto;
+}
+
+/* Icon styles */
+.task-icon {
+    margin-right: 5px;
+}
+
+.task-icon.check {
+    color: green;
+}
+
+.task-icon.remove {
+    color: red;
+}
+
+/* Task list styles */
+.list-group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.task-name {
+    font-weight: bold;
+}
+
+.due-date {
+    margin-right: 10px;
+}
+
+.tasks-stamp {
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+}
+
+.tasks-stamp:hover {
+    cursor: pointer;
+    background-color: #0056b3;
+}
+.name {
+    font-size: 20px;
+    font-weight: bold;
+  }
