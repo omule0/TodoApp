@@ -2,36 +2,21 @@
 <html>
 {% load static %}
 
-<head>
-  <link rel="stylesheet" type="text/css" href="{% static '/css/add_task.css' %}">
-  <script src="{% static 'js/add_task.js' %}"></script>
-</head>
-
-
-
 <div class="d-flex flex-column flex-lg-row h-lg-full bg-gray-100">
   <!-- Vertical Navbar -->
   <nav
     class="navbar show navbar-vertical h-lg-screen navbar-expand-lg px-0 py-3 py-lg-0 navbar-light bg-light border-end-lg"
-    id="navbarVertical"
-  >
+    id="navbarVertical">
     <div class="container-fluid">
       <!-- Toggler -->
       <!-- menu button -->
-      <button
-        class="navbar-toggler ms-n2"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#sidebarCollapse"
-        aria-controls="sidebarCollapse"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
+      <button class="navbar-toggler ms-n2" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarCollapse"
+        aria-controls="sidebarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <!-- Brand -->
       <a class="navbar-brand py-lg-5 mb-lg-5 px-lg-6 me-0" href="#">
-        <img src="Logo_todoApp.png" alt="TodoApp" />
+        <img src="{% static 'Logo_todoApp.png' %}" height="50" width="50" />
         <span class="name">TodoApp</span>
       </a>
       <!-- User menu (mobile) -->
@@ -40,14 +25,8 @@
         <div class="dropdown">
           <!-- Toggle -->
           <!-- Avatar -->
-          <a
-            href="#"
-            id="sidebarAvatar"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >
+          <a href="#" id="sidebarAvatar" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
             <div class="avatar bg-warning rounded-circle text-white">
               <img alt="Avatar" src="" />
             </div>
@@ -75,9 +54,7 @@
               <i class="fas fa-message"></i>
               <i class="bi bi-chat"></i> Messages
               <span
-                class="badge bg-opacity-30 bg-primary text-primary rounded-pill d-inline-flex align-items-center ms-auto"
-                >0</span
-              >
+                class="badge bg-opacity-30 bg-primary text-primary rounded-pill d-inline-flex align-items-center ms-auto">0</span>
             </a>
           </li>
           <li class="nav-item">
@@ -109,13 +86,13 @@
         <!-- User (md) -->
         <ul class="navbar-nav mb-5">
           <li class="nav-item">
-            <a class="nav-link" href="#account">
+            <a class="nav-link" href="{% url 'Users-profile' %}">
               <i class="fas fa-user-check"></i>
-              <i class="bi bi-person-square"></i> Account
+              <i class="bi bi-person-square"></i> Profile
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{% url 'logout' %}">
               <i class="fas fa-right-from-bracket"></i>
               <i class="bi bi-box-arrow-left"></i> Logout
             </a>
@@ -133,7 +110,7 @@
             <div class="col-sm-6 col-12 mb-4 mb-sm-0">
               <!-- Title -->
               <h6 class="h2 mb-0 ls-tight">
-                <i class="far fa-sun"></i> My Day
+                <i class="far fa-face-grin-beam"> My Day</i>
               </h6>
               <p id="watch"></p>
             </div>
@@ -192,10 +169,7 @@
                   <td>{{ task.due_time }}</td>
                   <td>
                     <a href="#" class="btn btn-sm btn-neutral">View</a>
-                    <button
-                      type="button"
-                      class="btn btn-sm btn-square btn-neutral text-danger-hover"
-                    >
+                    <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
                       <i class="bi bi-trash">Edit</i>
                     </button>
                   </td>
@@ -205,7 +179,7 @@
             </table>
           </div>
         </div>
-      
+
     </main>
     {% endblock content %}
   </div>
@@ -250,21 +224,47 @@
   }, 1000);
 </script>
 
+<script>
+  $(document).ready(function () {
+    $("#sticky_notes").click(function () {
+      $.ajax({
+        url: "/home/sticky_notes/",
+        success: function (data) {
+          $("#content-container").html(data);
+        },
+      });
+    });
+    $("#account-link").click(function () {
+      $.ajax({
+        url: "/path/to/account/view/",
+        success: function (data) {
+          $("#content-container").html(data);
+        },
+      });
+    });
+  });
+</script>
 
-<!-- webpixels Bootstrap -->
-<link href="https://unpkg.com/@webpixels/css/dist/index.css" rel="stylesheet" />
+<head>
+  <link rel="stylesheet" type="text/css" href="{% static '/css/add_task.css' %}">
+  <!-- webpixels Bootstrap -->
+  <link href="https://unpkg.com/@webpixels/css/dist/index.css" rel="stylesheet" />
 
-<!-- Font Awesome -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"rel="stylesheet"/>
-<link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
-<!--  jQuery for the AJAX and event handling -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!--  jQuery for the AJAX and event handling -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<!-- Bootstrap JavaScript -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <!-- Bootstrap JavaScript -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"integrity="sha512-9V9D+hzIJe8J7m26zvJZm7wZzg4+VYoo4lJ/2c7yJ4RZ8G6JnT6B3TzNwT6o4eV4TVs0Q0X9uB+zRYSdc6WuUg=="crossorigin="anonymous"referrerpolicy="no-referrer"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    integrity="sha512-9V9D+hzIJe8J7m26zvJZm7wZzg4+VYoo4lJ/2c7yJ4RZ8G6JnT6B3TzNwT6o4eV4TVs0Q0X9uB+zRYSdc6WuUg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+
+</head>

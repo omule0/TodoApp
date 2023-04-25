@@ -33,7 +33,6 @@ def sticky_notes(request):
     if request.is_ajax():
         return render(request, "sticky_notes.html")
 
-
 def add_task(request):
     if request.method == 'POST':
         form = TaskForm(request.POST)
@@ -45,3 +44,4 @@ def add_task(request):
                 'due_time': task.due_time.strftime('%H:%M:%S') if task.due_time else '',
             })
     return JsonResponse({'error': 'Invalid request'})
+

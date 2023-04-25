@@ -1,25 +1,39 @@
-{% extends 'base.html' %}
 {% load crispy_forms_tags %}
+
 {% block content %}
-<div class="mb-2">
-    <h2>Update Info</h2>
-    <!--
-        <p class="test-secondary">{{user.email}}</p>
-    -->
-</div>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <div class="mb-4">
+                        <h2>Update Info</h2>
+                        <!-- <p class="test-secondary">{{user.email}}</p> -->
+                    </div>
 
-<form method="POST">
-    {% csrf_token %}
-    <fieldset class="form-group">
-    
-        {{ u_form | crispy }}
+                    <form method="POST">
+                        {% csrf_token %}
+                        <fieldset class="form-group">
+                            {{ u_form | crispy }}
+                        </fieldset>
 
-    </fieldset>
-    <div class="form-group">
-        <button class="btn btn-outline-info" type="submit">
-            Update
-        </button>
+                        <div class="form-group">
+                            <button class="btn btn-outline-info" type="submit">
+                                Update
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-</form>
-
+</div>
 {% endblock content %}
+
+<style>
+    h2 {
+    font-size: 2rem;
+    font-weight: bold;
+}
+</style>
+<link href="https://unpkg.com/@webpixels/css/dist/index.css" rel="stylesheet" />
