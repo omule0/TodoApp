@@ -8,4 +8,4 @@ Our reminder feature sends you an email with a link to the task, allowing you to
 Our app also allows you to delete any task that you no longer need. To ensure optimal performance, we only store your tasks for up to seven days, after which they are automatically deleted. Say goodbye to missed deadlines and unfinished tasks, and say hello to efficient task management with our To-Do app!
 
 REQUIREMENTS
-We are building a web application using Django, a high-level Python web framework that facilitates rapid development and clean, pragmatic design. Our app aims to provide a minimalistic user interface while delivering a robust, reliable back-end system.
+We are building a web application using Django, a high-level Python web framework that facilitates rapid development and clean, pragmatic design. Our app aims to provide a minimalistic user interface while delivering a robust, reliable back-end system.For the front-end, we will be using standard web development tools like JavaScript, HTML, and CSS. 
