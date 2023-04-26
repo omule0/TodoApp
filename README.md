@@ -5,3 +5,4 @@ The app is a  task management tool that allows you to easily create, organize, a
 
 Our reminder feature sends you an email with a link to the task, allowing you to easily access and complete it. You can also specify when you want to be reminded, ensuring that you never miss a task. If a task is incomplete but its scheduled time has passed, our app will automatically mark it as skipped.
 
+Our app also allows you to delete any task that you no longer need. To ensure optimal performance, we only store your tasks for up to seven days, after which they are automatically deleted. Say goodbye to missed deadlines and unfinished tasks, and say hello to efficient task management with our To-Do app!
