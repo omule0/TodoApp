@@ -1,12 +1,9 @@
  MY TO-DO APP
 
+DESCRIPTION
+The app is a  task management tool that allows you to easily create, organize, and prioritize your daily and weekly tasks. With this app, you can set up an account and start creating your to-do list in just a few clicks. Keep track of all your chores, schedule them according to their expected date and time, and get notified when they are due using our reminder feature. 
 
 
-## Getting started
-
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
-
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
 
 ## Add your files
 
