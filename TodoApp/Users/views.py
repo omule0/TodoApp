@@ -43,6 +43,5 @@ def profile(request):
     return render(request, "Users/profile.html", context)
 
 
-
 def home(request):
     return render(request, 'home.html')
