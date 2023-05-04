@@ -4,17 +4,14 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.http import JsonResponse, HttpResponse
-from .forms import TaskForm
 from .models import Task
-from django.utils import timezone
-
-def landing_page(request):
-    return render(request, 'landing_page.html')
-
+from .forms import TaskForm
+# Create your views here.
 @login_required
 def sticky_notes(request):
     return render(request, 'sticky_notes.html')
-
+def landing_page(request):
+    return render(request, 'landing_page.html')
 @login_required
 def home(request):
     if request.method == 'POST':
@@ -32,8 +29,6 @@ def home(request):
         form = TaskForm()
     tasks = Task.objects.filter(user=request.user)
     return render(request, 'home.html', {'tasks': tasks, 'form': form})
-
-
 @login_required
 def add_task(request):
     if request.method == 'POST':
