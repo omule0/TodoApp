@@ -19,9 +19,9 @@ class TaskForm(forms.ModelForm):
         self.helper.add_input(Submit('submit', 'Submit'))
         self.helper.layout = Layout(
             Row(
-                Column('name', css_class='form-group col-md-6 mb-0'),
-                Column('due_date', css_class='form-group col-md-3 mb-0'),
-                Column('due_time', css_class='form-group col-md-3 mb-0'),
+                Column('name'),
+                Column('due_date'),
+                Column('due_time'),
                 css_class='form-row'
             ),
         )

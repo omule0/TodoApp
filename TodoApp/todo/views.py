@@ -46,3 +46,4 @@ def add_task(request):
             return JsonResponse({'error': 'Invalid form data'})
     else:
         return JsonResponse({'error': 'Invalid request'})
+

@@ -109,47 +109,46 @@
           <div class="row align-items-center">
             <div class="col-sm-6 col-12 mb-4 mb-sm-0">
               <!-- Title -->
-              <h6 class="h2 mb-0 ls-tight">
-                <i class="far fa-face-grin-beam"> My Day</i>
-              </h6>
+              <i class="far fa-face-grin-beam">  My Day</i>
               <p id="watch"></p>
             </div>
             <!-- Actions -->
-            <!-- 
-              <div class="col-sm-6 col-12 text-sm-end">
+            <div class="col-sm-6 col-12 text-sm-end">
               <div class="mx-n1">
-                <a href="#" class="btn btn-outline-primary btn-sm mx-1">
-                  <span class="pe-2">
-                    <i class="bi bi-plus"></i>
-                  </span>
-                  <span>Add Task</span>
-                </a>
+                <button type="button" class="btn btn-outline-primary" data-toggle="modal"
+                  data-target="#exampleModal">Add a task</button>
               </div>
             </div>
-            -->
           </div>
         </div>
       </div>
     </header>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header pb-1">
+            <h5 class="mb-0">Create Your Tasks</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          {% load crispy_forms_tags %}
+          <form method="POST" id="addTaskForm">
+            {% csrf_token %}
+            {% crispy form %}
+          </form>
+        </div>
+      </div>
+    </div>
     <!-- Main -->
     {% block content %}
     <main class="py-10 bg-surface-secondary">
       <div class="container-fluid">
         <div class="card mb-7">
           <div class="card-header">
-            <h5 class="mb-0">Add Tasks</h5>
-          </div>
-          <div class="card-header">
-            {% load crispy_forms_tags %}
-            <form method="POST" id="addTaskForm">
-              {% csrf_token %}
-              {% crispy form %}
-            </form>
-          </div>
-        </div>
-        <div class="card mb-7">
-          <div class="card-header">
-            <h5 class="mb-0">Tasks</h5>
+            <h5 class="mb-0">Your Tasks</h5>
           </div>
           <div class="table-responsive">
             <table class="table table-hover table-nowrap">
@@ -173,6 +172,7 @@
                       <i class="bi bi-trash">Edit</i>
                     </button>
                   </td>
+
                 </tr>
                 {% endfor %}
               </tbody>
@@ -232,8 +232,9 @@
   <title>home</title>
 
   <link rel="stylesheet" type="text/css" href="{% static '/css/add_task.css' %}">
-  <!-- webpixels Bootstrap --><link href="https://unpkg.com/@webpixels/css/dist/index.css" rel="stylesheet" />
-  
+  <!-- webpixels Bootstrap -->
+  <link href="https://unpkg.com/@webpixels/css/dist/index.css" rel="stylesheet" />
+
 
   <!-- Font Awesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
@@ -253,4 +254,5 @@
 
 
 </head>
+
 </html>
