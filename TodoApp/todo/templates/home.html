@@ -134,7 +134,7 @@
             </button>
           </div>
           {% load crispy_forms_tags %}
-          <form method="POST" id="addTaskForm">
+          <form method="POST" id="addTaskForm" action="">
             {% csrf_token %}
             {% crispy form %}
           </form>
@@ -341,7 +341,7 @@
     appearance: none;
     width: 20px;
     height: 20px;
-    background-color: #eee;
+    background-color: #eeeeee;
     position: relative;
     border-radius: 3px;
     cursor: pointer;
