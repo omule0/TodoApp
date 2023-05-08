@@ -1,0 +1,20 @@
+
+
+{% block title %}
+   | Edit
+{% endblock title %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="content">
+        <form class="form my-2 my-lg-0" method="POST">
+            {% csrf_token %}
+            {% crispy form %}
+        </form>
+    </div>
+{% endblock content %}
+
+{% block update_task_image %}
+    <img src="{% static 'update_task.svg' %}">
+{% endblock %}

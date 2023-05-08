@@ -53,3 +53,15 @@ def deleteTask(request, name_id):
     task = Task.objects.get(pk=name_id)
     task.delete()
     return redirect('/home')
+
+@login_required
+def updateTask(request, name_id):
+    task = Task.objects.get(pk=name_id)
+    if request.method == 'POST':
+        form = TaskForm(request.POST, instance=task)
+        if form.is_valid():
+            task.save()
+            return redirect('/home')
+    else:
+        form = TaskForm(instance=task)
+    return render(request, 'update_task.html', {'form': form})

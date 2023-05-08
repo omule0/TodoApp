@@ -4,9 +4,8 @@
 
 <div class="d-flex flex-column flex-lg-row h-lg-full bg-gray-100">
   <!-- Vertical Navbar -->
-  <nav
-    class="navbar show navbar-vertical h-lg-screen navbar-expand-lg px-0 py-3 py-lg-0 navbar-light bg-light border-end-lg"
-    id="navbarVertical">
+  <nav class="navbar show navbar-vertical h-lg-screen navbar-expand-lg px-0 py-3
+      py-lg-0 navbar-light bg-light border-end-lg" id="navbarVertical">
     <div class="container-fluid">
       <!-- Toggler -->
       <!-- menu button -->
@@ -44,7 +43,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="task_list">
+            <a class="nav-link" href="#">
               <i class="fas fa-list-check"></i>
               <i class="bi bi-bar-chart"></i> Today
             </a>
@@ -53,8 +52,8 @@
             <a class="nav-link" href="#">
               <i class="fas fa-message"></i>
               <i class="bi bi-chat"></i> Messages
-              <span
-                class="badge bg-opacity-30 bg-primary text-primary rounded-pill d-inline-flex align-items-center ms-auto">0</span>
+              <span class="badge bg-opacity-30 bg-primary text-primary
+                  rounded-pill d-inline-flex align-items-center ms-auto">0</span>
             </a>
           </li>
           <li class="nav-item">
@@ -109,14 +108,14 @@
           <div class="row align-items-center">
             <div class="col-sm-6 col-12 mb-4 mb-sm-0">
               <!-- Title -->
-              <i class="far fa-face-grin-beam">  My Day</i>
+              <i class="far fa-face-grin-beam"> My Day</i>
               <p id="watch"></p>
             </div>
             <!-- Actions -->
             <div class="col-sm-6 col-12 text-sm-end">
               <div class="mx-n1">
-                <button type="button" class="btn btn-outline-primary" data-toggle="modal"
-                  data-target="#exampleModal">Add a task</button>
+                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#AddTask">Add a
+                  task</button>
               </div>
             </div>
           </div>
@@ -124,7 +123,7 @@
       </div>
     </header>
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="AddTask" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
       aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -154,35 +153,114 @@
             <table class="table table-hover table-nowrap">
               <thead thead class="table-light">
                 <tr>
+                  <th scope="col"><input type="checkbox" id="check"></th>
                   <th scope="col">Task Name</th>
                   <th scope="col">Due Date</th>
                   <th scope="col">Due Time</th>
-                  <th scope="col">Actions</th>
+                  <th scope="col"> Actions on tasks</th>
                 </tr>
               </thead>
               <tbody id="taskTableBody">
                 {% for task in tasks %}
-                    {% if task.completed %}
-                        <tr>
-                          <td>{{ task.name }}</td>
-                          <td>{{ task.due_date }}</td>
-                          <td>{{ task.due_time }}</td>
-                          <td class="text-center"><a class="btn btn-sm btn-neutral"href="{% url 'deleteTask' task.id %}">Delete</a></td>
-                        </tr>
-                    {% else %}
-                        <tr>
-                          <td>{{ task.name }}</td>
-                          <td>{{ task.due_date }}</td>
-                          <td>{{ task.due_time }}</td>
-                          <td class="text-center"><a class="btn btn-sm btn-neutral"href="{% url 'deleteTask' task.id %}">Delete</a></td>
-                        </tr>
-                    {% endif %}
+                {% if task.completed %}
+                <tr>
+                  <td><input type="checkbox" id="check"></td>
+                  <td>{{ task.name }}</td>
+                  <td>{{ task.due_date }}</td>
+                  <td>{{ task.due_time }}</td>
+                  <td>
+                    <button type="button" class="btn btn-sm" data-toggle="modal"
+                      data-target="#Description">Description</button>
+                    <a href="{% url 'updateTask' task.id %}" class="btn btn-sm
+                        btn-warning">Edit</a>
+                    <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete"><i
+                        class="far fa-trash-can"></i>
+                    </button>
+                  </td>
+                </tr>
+                {% else %}
+                <tr>
+                  <td><input type="checkbox" id="check"></td>
+                  <td>{{ task.name }}</td>
+                  <td>{{ task.due_date }}</td>
+                  <td>{{ task.due_time }}</td>
+                  <td>
+                    <button type="button" class="btn btn-sm btn-neutral" data-toggle="modal"
+                      data-target="#Description">Details</button>
+                    <a href="{% url 'updateTask' task.id %}" class="btn btn-sm
+                        btn-warning">Edit</a>
+                    <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete"><i
+                        class="far fa-trash-can"></i>
+                    </button>
+                  </td>
+                </tr>
+                {% endif %}
                 {% endfor %}
               </tbody>
             </table>
+            <div class="modal fade" id="Description" tabindex="-1" role="dialog" aria-labelledby="Description"
+              aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header pb-1">
+                    <div class="modal-title d-flex">
+                      <i class="fas fa-info"> Task details</i>
+                    </div>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body pb-1">
+                    {% for task in tasks %}
+                    {% if task.completed %}
+                    <p class="text-muted">{{ task.description }} </p>
+                    {% else %}
+                    <p class="text-muted">Date created:{{ task.created_at }} </p>
+                    <p class="text-muted">{{ task.description }} </p>
+                    {% endif %}
+                    {% endfor %}
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Dismiss</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="delete" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <div class="container d-flex pl-0"><img src="https://imgur.com/Kh1gwTq.png">
+                      <h5 class="modal-title ml-2" id="delete">Delete the
+                        link?</h5>
+                    </div>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <p class="text-muted">If you delete the link will be gone
+                      forever. Are you sure you want to proceed?
+                    </p>
+                  </div>
+                  <div class="modal-footer">
+                    {% for task in tasks %}
+                    {% if task.completed %}
+                    <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-light"><a class="far
+                          fa-trash-can" href="{% url 'deleteTask' task.id %}"></a>Delete</button>
+                    {% else %}
+                    <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-light"><a class="far
+                          fa-trash-can" href="{% url 'deleteTask' task.id %}"></a></button>
+                    {% endif %}
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-
     </main>
     {% endblock content %}
   </div>
@@ -212,8 +290,6 @@
     addTaskForm.reset();
   });
 </script>
-
-
 <script>
   function callDateTime() {
     var currentDate = new Date().toDateString();
@@ -226,7 +302,6 @@
     callDateTime();
   }, 1000);
 </script>
-
 <script>
 </script>
 
@@ -234,7 +309,8 @@
 
   <title>home</title>
 
-  <link rel="stylesheet" type="text/css" href="{% static '/css/add_task.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static '/css/add_task.css'
+        %}">
   <!-- webpixels Bootstrap -->
   <link href="https://unpkg.com/@webpixels/css/dist/index.css" rel="stylesheet" />
 
@@ -250,7 +326,6 @@
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     integrity="sha512-9V9D+hzIJe8J7m26zvJZm7wZzg4+VYoo4lJ/2c7yJ4RZ8G6JnT6B3TzNwT6o4eV4TVs0Q0X9uB+zRYSdc6WuUg=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -259,3 +334,43 @@
 </head>
 
 </html>
+
+<style>
+  
+.table tbody td input[type="checkbox"] {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background-color: #eee;
+    position: relative;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.table tbody td input[type="checkbox"]:after {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 600;
+    content: "\f00c";
+    color: #fff;
+    font-size: 15px;
+    display: none;
+}
+
+.table tbody td input[type="checkbox"]:checked,
+.table tbody td input[type="checkbox"]:checked:hover {
+    background-color: #40bfc1;
+}
+
+.table tbody td input[type="checkbox"]:checked::after {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.table tbody td input[type="checkbox"]:hover {
+    background-color: #ddd;
+}
+</style>
