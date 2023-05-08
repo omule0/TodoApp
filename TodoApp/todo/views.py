@@ -47,3 +47,9 @@ def add_task(request):
     else:
         return JsonResponse({'error': 'Invalid request'})
 
+
+@login_required
+def deleteTask(request, name_id):
+    task = Task.objects.get(pk=name_id)
+    task.delete()
+    return redirect('/home')

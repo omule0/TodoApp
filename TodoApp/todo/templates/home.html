@@ -162,18 +162,21 @@
               </thead>
               <tbody id="taskTableBody">
                 {% for task in tasks %}
-                <tr>
-                  <td>{{ task.name }}</td>
-                  <td>{{ task.due_date }}</td>
-                  <td>{{ task.due_time }}</td>
-                  <td>
-                    <a href="#" class="btn btn-sm btn-neutral">View</a>
-                    <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
-                      <i class="bi bi-trash">Edit</i>
-                    </button>
-                  </td>
-
-                </tr>
+                    {% if task.completed %}
+                        <tr>
+                          <td>{{ task.name }}</td>
+                          <td>{{ task.due_date }}</td>
+                          <td>{{ task.due_time }}</td>
+                          <td class="text-center"><a class="btn btn-sm btn-neutral"href="{% url 'deleteTask' task.id %}">Delete</a></td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                          <td>{{ task.name }}</td>
+                          <td>{{ task.due_date }}</td>
+                          <td>{{ task.due_time }}</td>
+                          <td class="text-center"><a class="btn btn-sm btn-neutral"href="{% url 'deleteTask' task.id %}">Delete</a></td>
+                        </tr>
+                    {% endif %}
                 {% endfor %}
               </tbody>
             </table>

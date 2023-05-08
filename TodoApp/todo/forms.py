@@ -6,7 +6,7 @@ from .models import Task
 class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
-        fields = ['name', 'due_date', 'due_time']
+        fields = ['name', 'due_date', 'due_time','description']
         widgets = {
             'due_date': forms.DateInput(attrs={'type': 'date'}),
             'due_time': forms.TimeInput(attrs={'type': 'time'}),
@@ -20,8 +20,9 @@ class TaskForm(forms.ModelForm):
         self.helper.layout = Layout(
             Row(
                 Column('name'),
-                Column('due_date'),
                 Column('due_time'),
+                Column('due_date'),
+                Column('description'),
                 css_class='form-row'
             ),
         )
