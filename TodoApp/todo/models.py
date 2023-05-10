@@ -12,6 +12,11 @@ class Task(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     description = models.TextField(null=True, blank=True)
     completed = models.BooleanField(default=False)
+
+    def toggle_completed(self):
+        self.completed = not self.completed
+        self.save()
+        
     def __str__(self):
         return self.name
       

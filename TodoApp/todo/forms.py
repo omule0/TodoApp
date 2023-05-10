@@ -6,7 +6,7 @@ from .models import Task
 class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
-        fields = ['name', 'due_date', 'due_time','description']
+        fields = ['name', 'due_date', 'due_time','description','completed']
         widgets = {
             'due_date': forms.DateInput(attrs={'type': 'date'}),
             'due_time': forms.TimeInput(attrs={'type': 'time'}),
