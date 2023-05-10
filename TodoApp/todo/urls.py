@@ -10,4 +10,5 @@ urlpatterns = [
         path('crossoff/<int:name_id>', views.cross_off, name='cross_off'),
         path('uncross/<int:name_id>', views.uncross, name='uncross'),
         re_path(r'^home/sticky_notes/$', views.sticky_notes, name='sticky_notes'),
+
 ]

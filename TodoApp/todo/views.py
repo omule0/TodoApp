@@ -66,12 +66,14 @@ def updateTask(request, name_id):
         form = TaskForm(instance=task)
     return render(request, 'update_task.html', {'form': form})
 
+@login_required
 def cross_off(request, name_id):
     task = Task.objects.get(pk=name_id)
     task.completed = True
     task.save()
     return redirect('home')
 
+@login_required
 def uncross(request, name_id):
     task = Task.objects.get(pk=name_id)
     task.completed = False

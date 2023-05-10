@@ -12,6 +12,8 @@ class Task(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     description = models.TextField(null=True, blank=True)
     completed = models.BooleanField(default=False)
+    remind_minutes = models.IntegerField(default=0)
+    is_skipped = models.BooleanField(default=False)
 
     def toggle_completed(self):
         self.completed = not self.completed
@@ -19,4 +21,6 @@ class Task(models.Model):
         
     def __str__(self):
         return self.name
-      
+    
+    class Meta:
+        ordering = ['-due_date']
