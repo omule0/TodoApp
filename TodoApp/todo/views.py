@@ -6,6 +6,7 @@ from django.http import HttpResponseRedirect
 from django.http import JsonResponse, HttpResponse
 from .models import Task
 from .forms import TaskForm
+from datetime import datetime, timedelta, timezone
 # Create your views here.
 @login_required
 def sticky_notes(request):
@@ -79,3 +80,15 @@ def uncross(request, name_id):
     task.completed = False
     task.save()
     return redirect('home')
+
+def delete_old_tasks(request):
+    if request.method == 'POST':
+        current_time = datetime.now(timezone.utc)
+        tasks = Task.objects.all()
+        
+        for task in tasks:
+            time_difference = current_time - task.created_at.replace(tzinfo=timezone.utc)
+            if time_difference.days > 7:
+                task.delete()
+        
+        return redirect('home')

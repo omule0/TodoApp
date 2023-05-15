@@ -4,3 +4,4 @@ def task_skip(request, pk):
     task.skipped = True
     task.save()
     return redirect('task_list')
+

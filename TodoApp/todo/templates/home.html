@@ -179,8 +179,8 @@
                   </td>
                   <td>
                     <button type="button" class="btn btn-sm task-buttons" data-toggle="modal"
-                    data-target="#delete{{ task.id }}"><i class="far fa-trash-can"></i>
-                  </button>
+                      data-target="#delete{{ task.id }}"><i class="far fa-trash-can"></i>
+                    </button>
                   </td>
                 </tr>
                 {% else %}
@@ -199,8 +199,8 @@
                   </td>
                   <td>
                     <button type="button" class="btn btn-sm task-buttons" data-toggle="modal"
-                    data-target="#delete{{ task.id }}"><i class="far fa-trash-can"></i>
-                  </button>
+                      data-target="#delete{{ task.id }}"><i class="far fa-trash-can"></i>
+                    </button>
                   </td>
                 </tr>
                 {% endif %}
@@ -265,12 +265,22 @@
               </div>
             </div>
             {% endfor %}
+            <div class="card mb-7">
+              <div class="card-header">
+                <form method="post" action="{% url 'delete_old_tasks' %}">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-danger">Delete Old Tasks</button>
+                </form>
+              </div>
+            </div>
           </div>
         </div>
+
     </main>
     {% endblock content %}
   </div>
 </div>
+
 
 
 <script>
