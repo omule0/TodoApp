@@ -10,6 +10,6 @@ urlpatterns = [
         path('crossoff/<int:name_id>', views.cross_off, name='cross_off'),
         path('uncross/<int:name_id>', views.uncross, name='uncross'),
         path('delete_old_tasks/', views.delete_old_tasks, name='delete_old_tasks'),
+        path('mark_skipped_tasks/', views.mark_skipped_tasks, name='mark_skipped_tasks'),
         re_path(r'^home/sticky_notes/$', views.sticky_notes, name='sticky_notes'),
-
 ]

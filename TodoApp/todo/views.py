@@ -82,13 +82,21 @@ def uncross(request, name_id):
     return redirect('home')
 
 def delete_old_tasks(request):
-    if request.method == 'POST':
-        current_time = datetime.now(timezone.utc)
+    current_time = datetime.now(timezone.utc)
+    tasks = Task.objects.all()
+    for task in tasks:
+        time_difference = current_time - task.created_at.replace(tzinfo=timezone.utc)
+        if time_difference.days > 7:
+            task.delete()
+    return redirect('home')
+
+def mark_skipped_tasks(request):
+        current_datetime = datetime.now()
         tasks = Task.objects.all()
-        
         for task in tasks:
-            time_difference = current_time - task.created_at.replace(tzinfo=timezone.utc)
-            if time_difference.days > 7:
-                task.delete()
-        
+            if not task.completed and task.due_date and task.due_time:
+                due_datetime = datetime.combine(task.due_date, task.due_time)
+                if due_datetime < current_datetime:
+                    task.is_skipped = True
+                    task.save() 
         return redirect('home')

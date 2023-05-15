@@ -25,7 +25,6 @@ class TaskForm(forms.ModelForm):
                 Column('due_time'),
                 Column('due_date'),
                 Column('description'),
-                Column('completed'),
                 Column('remind_minutes'),
                 css_class='form-row'
             ),
