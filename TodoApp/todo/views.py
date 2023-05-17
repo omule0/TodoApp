@@ -105,3 +105,8 @@ def mark_skipped_tasks(request):
                     task.is_skipped = True
                     task.save() 
         return redirect('home')
+
+
+@login_required
+def today(request):
+    return render(request, 'today.html')

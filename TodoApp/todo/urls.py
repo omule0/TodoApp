@@ -11,5 +11,6 @@ urlpatterns = [
         path('uncross/<int:name_id>', views.uncross, name='uncross'),
         path('delete_old_tasks/', views.delete_old_tasks, name='delete_old_tasks'),
         path('mark_skipped_tasks/', views.mark_skipped_tasks, name='mark_skipped_tasks'),
+        path('home/today/', views.today, name='today'),
         re_path(r'^home/sticky_notes/$', views.sticky_notes, name='sticky_notes'),
 ]
