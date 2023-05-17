@@ -282,12 +282,12 @@
               </div>
             </div>
             {% endfor %}
-            <div class="card mb-7">
+            <div class="card-footer border-0 py-5">
               <div class="card-header">
-                <button type="button" class="btn btn-dark"><a href="{% url 'delete_old_tasks' %}">Delete Old
-                    Tasks</a></button>
-                <button type="button" class="btn btn-dark"><a href="{% url 'mark_skipped_tasks' %}">skip
-                    tasks</a></button>
+                <a class="btn btn-bg alert-dark"href="{% url 'delete_old_tasks' %}">Delete Old
+                    Tasks</a>
+                <a href="{% url 'mark_skipped_tasks' %}">Skip
+                    tasks</a>
               </div>
             </div>
 
@@ -342,8 +342,10 @@
   <link href="https://unpkg.com/@webpixels/css/dist/index.css" rel="stylesheet" />
 
 
-  <!-- Font Awesome -->
+  <!-- icons -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+
+ <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
   <!-- Bootstrap JavaScript -->

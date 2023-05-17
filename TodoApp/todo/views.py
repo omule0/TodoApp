@@ -11,8 +11,10 @@ from datetime import datetime, timedelta, timezone
 @login_required
 def sticky_notes(request):
     return render(request, 'sticky_notes.html')
+
 def landing_page(request):
     return render(request, 'landing_page.html')
+
 @login_required
 def home(request):
     if request.method == 'POST':
@@ -30,6 +32,7 @@ def home(request):
         form = TaskForm()
     tasks = Task.objects.filter(user=request.user)
     return render(request, 'home.html', {'tasks': tasks, 'form': form})
+
 @login_required
 def add_task(request):
     if request.method == 'POST':
@@ -81,6 +84,7 @@ def uncross(request, name_id):
     task.save()
     return redirect('home')
 
+@login_required
 def delete_old_tasks(request):
     current_time = datetime.now(timezone.utc)
     tasks = Task.objects.all()
@@ -90,6 +94,7 @@ def delete_old_tasks(request):
             task.delete()
     return redirect('home')
 
+@login_required
 def mark_skipped_tasks(request):
         current_datetime = datetime.now()
         tasks = Task.objects.all()
