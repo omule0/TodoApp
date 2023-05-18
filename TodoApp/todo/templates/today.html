@@ -4,11 +4,11 @@
 {% block content %}
 <div class="card">
     <div class="card-header">
-        <h5>Today<span class="badge bg-opacity-30 bg-primary text-primary
-        rounded-pill d-inline-flex align-items-center ms-auto">0</span></h5>
+        <h5>Today <span class="badge bg-opacity-30 bg-primary text-primary
+        rounded-pill d-inline-flex align-items-center ms-auto">{{ total_tasks }}</span></h5>
     </div>
     <div class="card-body">
-        <div >
+        <div class="col-12">
             {% load crispy_forms_tags %}
             <form method="POST" id="ListForm" action="">
               {% csrf_token %}

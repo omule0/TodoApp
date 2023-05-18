@@ -96,6 +96,7 @@ def mark_skipped_tasks(request):
 
 
 @login_required
+
 def today(request):
     if request.method == 'POST':
         form = ListForm(request.POST)
@@ -105,5 +106,7 @@ def today(request):
             task.save()
     else:
         form = ListForm()
+    
     tasks = List.objects.filter(user=request.user)
-    return render(request, 'today.html', {'tasks': tasks, 'form': form})   
+    total_tasks = List.objects.filter(user=request.user).count()
+    return render(request, 'today.html', {'tasks': tasks, 'form': form, 'total_tasks': total_tasks}) 

@@ -39,16 +39,17 @@ class ListForm(forms.ModelForm):
             'item': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter task here'}),
             'due_time': forms.TimeInput(attrs={'type': 'time'}),
         }
-        def __init__(self, *args, **kwargs):
-            super(ListForm, self).__init__(*args, **kwargs)
-            self.helper = FormHelper()
-            self.helper.form_method = 'post'
-            self.helper.add_input(Submit('submit', 'Submit', onclick="location.reload();"))
-            self.helper.layout = Layout(
-                Column(
-                    Column('item'),
-                    Column('due_time'),
-                    css_class='form-row'
-                ),
-            )
+
+    def __init__(self, *args, **kwargs):
+        super(ListForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_method = 'post'
+        self.helper.add_input(Submit('submit', 'Submit', onclick="location.reload();"))
+        self.helper.layout = Layout(
+            Column(
+                Column('item'),
+                Column('due_time'),
+                css_class='form-row'
+            ),
+        )
 
