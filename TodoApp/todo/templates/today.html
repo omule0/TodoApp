@@ -4,13 +4,40 @@
 {% block content %}
 <div class="card">
     <div class="card-header">
-      <h5>Today<span class="badge bg-opacity-30 bg-primary text-primary
-        rounded-pill d-inline-flex align-items-center ms-auto">0</span></h5> 
+        <h5>Today<span class="badge bg-opacity-30 bg-primary text-primary
+        rounded-pill d-inline-flex align-items-center ms-auto">0</span></h5>
     </div>
     <div class="card-body">
-      <!-- Placeholder -->
-      <span class="d-block h-40 border border-2 border-dashed rounded"></span>
+        <div >
+            {% load crispy_forms_tags %}
+            <form method="POST" id="ListForm" action="">
+              {% csrf_token %}
+              {% crispy form %}
+            </form>
+        </div>
+        {% if all_items %}
+        <div class="table-responsive">
+            <table class="table table-hover table-nowrap">
+                <thead thead class="table-light">
+                    <tr>
+                        <th scope="col">Task Name</th>
+                    </tr>
+                </thead>
+                <tbody id="taskTableBody">
+                    {% for thing in all_items %}
+                    {% if thing.completed %}
+                    <tr>
+                        <td class="striker">{{ thing.item }}</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td>{{ thing.item }}</td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
     </div>
-  </div>
 {% endblock content %}
-    

@@ -1,4 +1,4 @@
-from django.urls import path, re_path
+from django.urls import path
 from . import views
 
 urlpatterns = [
@@ -12,5 +12,5 @@ urlpatterns = [
         path('delete_old_tasks/', views.delete_old_tasks, name='delete_old_tasks'),
         path('mark_skipped_tasks/', views.mark_skipped_tasks, name='mark_skipped_tasks'),
         path('home/today/', views.today, name='today'),
-        re_path(r'^home/sticky_notes/$', views.sticky_notes, name='sticky_notes'),
+        path('home/sticky_notes/', views.sticky_notes, name='sticky_notes'),
 ]

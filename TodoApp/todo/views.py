@@ -4,9 +4,10 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.http import JsonResponse, HttpResponse
-from .models import Task
-from .forms import TaskForm
+from .models import Task, List
+from .forms import TaskForm,ListForm
 from datetime import datetime, timedelta, timezone
+from django.contrib import messages
 # Create your views here.
 @login_required
 def sticky_notes(request):
@@ -23,11 +24,6 @@ def home(request):
             task = form.save(commit=False)
             task.user = request.user
             task.save()
-            return JsonResponse({
-                'name': task.name,
-                'due_date': task.due_date.strftime('%Y-%m-%d') if task.due_date else '',
-                'due_time': task.due_time.strftime('%H:%M:%S') if task.due_time else '',
-            })
     else:
         form = TaskForm()
     tasks = Task.objects.filter(user=request.user)
@@ -41,15 +37,7 @@ def add_task(request):
             task = form.save(commit=False)
             task.user = request.user
             task.save()
-            return JsonResponse({
-                'name': task.name,
-                'due_date': task.due_date.strftime('%Y-%m-%d') if task.due_date else '',
-                'due_time': task.due_time.strftime('%H:%M:%S') if task.due_time else '',
-            })
-        else:
-            return JsonResponse({'error': 'Invalid form data'})
-    else:
-        return JsonResponse({'error': 'Invalid request'})
+
 
 
 @login_required
@@ -109,4 +97,13 @@ def mark_skipped_tasks(request):
 
 @login_required
 def today(request):
-    return render(request, 'today.html')
+    if request.method == 'POST':
+        form = ListForm(request.POST)
+        if form.is_valid():
+            task = form.save(commit=False)
+            task.user = request.user
+            task.save()
+    else:
+        form = ListForm()
+    tasks = List.objects.filter(user=request.user)
+    return render(request, 'today.html', {'tasks': tasks, 'form': form})   
