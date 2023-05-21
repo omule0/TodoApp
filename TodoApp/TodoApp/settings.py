@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'TodoApp.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.msql',
+        'ENGINE': 'django.db.backends.sqlite3',
         'NAME': 'django',
         'USER': 'root',
         'PASSWORD': '',
