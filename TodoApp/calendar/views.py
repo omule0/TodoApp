@@ -1,13 +1,13 @@
 
 from django.shortcuts import render
 from django.http import JsonResponse 
-from calender.models import Events 
- 
+from calendar.models import Events 
 
-def index(request):  
-    all_events = Events.objects.all()
-    context = {
-        "events":all_events,
+
+def index(request): 
+    all_events = Events.objects.all()
+    context = {
+        "events":all_events,
     }
     return render(request,'index.html',context)
  
