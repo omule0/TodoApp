@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'Users',
     'todo',
+    'calendar'
 ]
 
 MIDDLEWARE = [
@@ -79,7 +80,13 @@ WSGI_APPLICATION = 'TodoApp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': 'django',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '3306'
+        
+        
     }
 }
 
