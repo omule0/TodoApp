@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h5>Weekly Tasks<span class="badge bg-opacity-30 bg-primary text-primary
+        rounded-pill d-inline-flex align-items-center ms-auto">{{ total_tasks }}</span></h5>
+        <div class="text-sm-end">
+            <div class="mx-n1">
+              <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#AddTask">Add a
+                task</button>
+            </div>
+    </div>
+    <div class="modal fade" id="AddTask" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header pb-1">
+            <h5 class="mb-0">Create Your Tasks</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          {% load crispy_forms_tags %}
+          <form method="POST" id="ListForm" action="">
+            {% csrf_token %}
+            {% crispy form %}
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover table-nowrap">
+                <thead thead class="table-light">
+                    <tr>
+                        <th scope="col">Status</th>
+                        <th scope="col">Task Name</th>
+                        <th scope="col">Due Time</th>
+                        <th scope="col">Actions</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                </thead>
+                <tbody id="taskTableBody">
+                    {% for list in lists %}
+                    {% if list.completed %}
+                    <tr>
+                        <td><i class="fas fa-check"></i></td>
+                        <td class="striker">{{ list.item }}</td>
+                        <td class="striker">{{ list.due_time }}</td>
+                        <td><a href="{% url 'weekuncross' list.id %}" class="btn btn-sm
+                            btn-outline-secondary">uncross</a></td>
+                        <td><a href="{% url 'deleteList' list.id %}" class="btn btn-sm btn-danger">Delete</a></td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td><i class="fas fa-spinner"></i></td>
+                        <td >{{ list.item }}</td>
+                        <td >{{ list.due_time }}</td>
+                        <td><a href="{% url 'week_cross_off' list.id %}" class="btn btn-sm
+                            btn-outline-tertiary">crossoff</a></td>
+                        <td><a href="{% url 'deleteList' list.id %}" class="btn btn-sm btn-danger">Delete</a></td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <style>
+        .striker {
+          text-decoration: line-through;
+        }
+      </style>
+  
+{% endblock content %}
