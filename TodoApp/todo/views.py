@@ -19,6 +19,7 @@ def landing_page(request):
 
 @login_required
 def home(request):
+    today = timezone.now().date()
     if request.method == 'POST':
         form = TaskForm(request.POST)
         if form.is_valid():
@@ -28,7 +29,9 @@ def home(request):
     else:
         form = TaskForm()
     tasks = Task.objects.filter(user=request.user)
-    return render(request, 'home.html', {'tasks': tasks, 'form': form})
+    total_tasks = Task.objects.filter(user=request.user).count()
+    upcoming_tasks = Task.objects.filter(due_date=today).count()
+    return render(request, 'home.html', {'tasks': tasks, 'form': form, 'total_tasks': total_tasks,'upcoming_tasks':upcoming_tasks})
 
 @login_required
 def add_task(request):
@@ -55,7 +58,7 @@ def updateTask(request, name_id):
             return redirect('/home')
     else:
         form = TaskForm(instance=task)
-    return render(request, 'update_task.html', {'form': form})
+    return render(request, 'update_task.html', {'form': form,})
 
 @login_required
 def cross_off(request, name_id):
@@ -105,8 +108,8 @@ def weekly(request):
         form = ListForm()
     
     lists= List.objects.filter(user=request.user)
-    total_tasks = List.objects.filter(user=request.user).count()
-    return render(request, 'weekly.html', {'lists': lists, 'form': form, 'total_tasks': total_tasks}) 
+    total_Weekly_tasks = List.objects.filter(user=request.user).count()
+    return render(request, 'weekly.html', {'lists': lists, 'form': form, 'total_Weekly_tasks': total_Weekly_tasks}) 
 
 @login_required
 def deleteList(request, item_id):
@@ -132,4 +135,5 @@ def weekuncross(request,item_id):
 def tasks_today(request):
     today = timezone.now().date()
     tasks = Task.objects.filter(due_date=today)
-    return render(request, 'upcoming.html', {'tasks': tasks})
+    upcoming_tasks = Task.objects.filter(due_date=today).count()
+    return render(request, 'upcoming.html', {'tasks': tasks,'upcoming_tasks':upcoming_tasks})

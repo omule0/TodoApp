@@ -36,13 +36,14 @@
           <li class="nav-item">
             <a class="nav-link" href="upcoming">
               <i class="fas fa-angles-right"></i>
-              <i class="bi bi-house"></i> Upcoming
+              <i class="bi bi-house"></i> Upcoming<span class="badge bg-opacity-30 bg-primary text-primary
+              rounded-pill d-inline-flex align-items-center ms-auto">{{ upcoming_tasks }}</span></h5>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="weekly">
               <i class="fas fa-list-check"></i>
-              <i class="bi bi-bar-chart"></i> Weekly
+              <i class="bi bi-bar-chart"></i> Weekly</h5>
             </a>
           </li>
           <li class="nav-item">
@@ -133,7 +134,8 @@
       <div class="container-fluid">
         <div class="card mb-7">
           <div class="card-header">
-            <h5 class="mb-0">Your Tasks</h5>
+            <h5 class="mb-0">Your Tasks<span class="badge bg-opacity-30 bg-primary text-primary
+              rounded-pill d-inline-flex align-items-center ms-auto">{{ total_tasks }}</span></h5></h5>
           </div>
           <div class="table-responsive">
             <table class="table table-hover table-nowrap">
@@ -273,9 +275,11 @@
             {% endfor %}
             <div class="card-footer border-0 py-5">
               <div class="card-header">
-                <a class="btn btn-bg alert-dark"href="{% url 'delete_old_tasks' %}">Delete Old
+                <a class="btn btn-sm
+                btn-outline-danger"href="{% url 'delete_old_tasks' %}">Delete Old
                     Tasks</a>
-                <a href="{% url 'mark_skipped_tasks' %}">Skip
+                <a class="btn btn-sm
+                btn-outline-danger"href="{% url 'mark_skipped_tasks' %}">Skip
                     tasks</a>
               </div>
             </div>
