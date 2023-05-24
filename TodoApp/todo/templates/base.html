@@ -98,10 +98,12 @@
                             <a href="#" id="sidebarAvatar" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false">
                                 <div class="avatar-parent-child">
+                                    {% if user.profile.image %}
                                     <img alt="Profile pic"
-                                        src="#"
+                                        src="{{ user.profile.image.url }}"
                                         class="avatar avatar- rounded-circle">
                                     <span class="avatar-child avatar-badge bg-success"></span>
+                                    {% endif %}
                                 </div>
                             </a>
                             <!-- Menu -->
