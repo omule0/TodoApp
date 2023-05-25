@@ -8,6 +8,7 @@ from .models import Task, List
 from .forms import TaskForm,ListForm
 from datetime import datetime, timedelta, timezone
 from django.contrib import messages
+from django.utils import timezone
 # Create your views here.
 @login_required
 def sticky_notes(request):
@@ -18,6 +19,7 @@ def landing_page(request):
 
 @login_required
 def home(request):
+    today = timezone.now().date()
     if request.method == 'POST':
         form = TaskForm(request.POST)
         if form.is_valid():
@@ -27,7 +29,9 @@ def home(request):
     else:
         form = TaskForm()
     tasks = Task.objects.filter(user=request.user)
-    return render(request, 'home.html', {'tasks': tasks, 'form': form})
+    total_tasks = Task.objects.filter(user=request.user).count()
+    upcoming_tasks = Task.objects.filter(due_date=today).count()
+    return render(request, 'home.html', {'tasks': tasks, 'form': form, 'total_tasks': total_tasks,'upcoming_tasks':upcoming_tasks})
 
 @login_required
 def add_task(request):
@@ -37,8 +41,6 @@ def add_task(request):
             task = form.save(commit=False)
             task.user = request.user
             task.save()
-
-
 
 @login_required
 def deleteTask(request, name_id):
@@ -56,7 +58,7 @@ def updateTask(request, name_id):
             return redirect('/home')
     else:
         form = TaskForm(instance=task)
-    return render(request, 'update_task.html', {'form': form})
+    return render(request, 'update_task.html', {'form': form,})
 
 @login_required
 def cross_off(request, name_id):
@@ -94,10 +96,8 @@ def mark_skipped_tasks(request):
                     task.save() 
         return redirect('home')
 
-
 @login_required
-
-def today(request):
+def weekly(request):
     if request.method == 'POST':
         form = ListForm(request.POST)
         if form.is_valid():
@@ -107,6 +107,33 @@ def today(request):
     else:
         form = ListForm()
     
-    tasks = List.objects.filter(user=request.user)
-    total_tasks = List.objects.filter(user=request.user).count()
-    return render(request, 'today.html', {'tasks': tasks, 'form': form, 'total_tasks': total_tasks}) 
+    lists= List.objects.filter(user=request.user)
+    total_Weekly_tasks = List.objects.filter(user=request.user).count()
+    return render(request, 'weekly.html', {'lists': lists, 'form': form, 'total_Weekly_tasks': total_Weekly_tasks}) 
+
+@login_required
+def deleteList(request, item_id):
+    task = List.objects.get(pk=item_id)
+    task.delete()
+    return redirect('weekly')
+
+@login_required
+def week_cross_off(request, item_id):
+    task = List.objects.get(pk=item_id)
+    task.completed = True
+    task.save()
+    return redirect('weekly')
+
+@login_required
+def weekuncross(request,item_id):
+    task = List.objects.get(pk=item_id)
+    task.completed = False
+    task.save()
+    return redirect('weekly')
+
+@login_required
+def tasks_today(request):
+    today = timezone.now().date()
+    tasks = Task.objects.filter(due_date=today)
+    upcoming_tasks = Task.objects.filter(due_date=today).count()
+    return render(request, 'upcoming.html', {'tasks': tasks,'upcoming_tasks':upcoming_tasks})

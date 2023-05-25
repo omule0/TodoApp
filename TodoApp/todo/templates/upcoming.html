@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="card">
+    <div class="card-header">
+      <h5>Upcoming Tasks<span class="badge bg-opacity-30 bg-primary text-primary
+        rounded-pill d-inline-flex align-items-center ms-auto">{{ upcoming_tasks }}</span></h5>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover table-nowrap">
+              <thead thead class="table-light">
+                <tr>
+                  <th scope="col">Status</th>
+                  <th scope="col">Task Name</th>
+                  <th scope="col">Due Date</th>
+                  <th scope="col">Due Time</th>
+                  <th scope="col">Actions on tasks</th>
+                  <th scope="col">Delete</th>
+                </tr>
+              </thead>
+              <tbody id="taskTableBody">
+                {% for task in tasks %}
+                  {% if task.completed %}
+                  <tr>
+                    <td><i class="fas fa-check"></i></td>
+                    <td class="striker">{{ task.name }}</td>
+                    <td class="striker">{{ task.due_date }}</td>
+                    <td class="striker">{{ task.due_time }}</td>
+                    <td>
+                      <a href="{% url 'updateTask' task.id %}" class="btn btn-sm
+                          btn-soft-secondary">Edit</a>
+                      <a href="{% url 'uncross' task.id %}" class="btn btn-sm
+                          btn-outline-secondary">uncross</a>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-light"><a class="far fa-trash-can"
+                            href="{% url 'deleteTask' task.id %}"></a></button>
+                    </td>
+                  </tr>
+                  {% elif task.is_skipped %}
+                  <tr>
+                    <td><i class="fas fa-xmark"></i></td>
+                  </td>
+                  <td class="double-strikethrough">{{ task.name }}</td>
+                  <td class="double-strikethrough">{{ task.due_date }}</td>
+                  <td class="double-strikethrough">{{ task.due_time }}</td>
+                  <td>
+                    <a href="{% url 'updateTask' task.id %}" class="btn btn-sm
+                        btn-soft-secondary">Edit</a>
+                    <a href="{% url 'uncross' task.id %}" class="btn btn-sm
+                        btn-outline-secondary">uncross</a>
+                  </td>
+                  <td>
+                    <button type="button" class="btn btn-light"><a class="far fa-trash-can"
+                        href="{% url 'deleteTask' task.id %}"></a></button>
+                  </td>
+                  </tr>
+                  {% else %}
+                  <tr>
+                    <td><i class="fas fa-spinner"></i></td>
+                    <td>{{ task.name }}</td>
+                    <td>{{ task.due_date }}</td>
+                    <td>{{ task.due_time }}</td>
+                    <td>
+                      <a href="{% url 'updateTask' task.id %}" class="btn btn-sm
+                          btn-outline-primary">Edit</a>
+                      <a href="{% url 'cross_off' task.id %}" class="btn btn-sm
+                          btn-outline-tertiary">cross_off</a>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-light"><a class="far fa-trash-can"
+                            href="{% url 'deleteTask' task.id %}"></a></button>
+                    </td>
+                  </tr>
+                  {% endif %}
+                {% endfor %}
+              </tbody>
+            </table>
+        </div>    
+    </div>
+  </div>
+{% endblock content %}

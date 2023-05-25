@@ -11,6 +11,10 @@ urlpatterns = [
         path('uncross/<int:name_id>', views.uncross, name='uncross'),
         path('delete_old_tasks/', views.delete_old_tasks, name='delete_old_tasks'),
         path('mark_skipped_tasks/', views.mark_skipped_tasks, name='mark_skipped_tasks'),
-        path('home/today/', views.today, name='today'),
+        path('home/upcoming/', views.tasks_today, name='tasks_today'),
+        path('home/weekly/', views.weekly, name='weekly'),
+        path('week_crossoff/<int:item_id>', views.week_cross_off, name='week_cross_off'),
+        path('weekuncross/<int:item_id>', views.weekuncross, name='weekuncross'),
+        path('deleteList/<int:item_id>/',views.deleteList, name='deleteList'),
         path('home/sticky_notes/', views.sticky_notes, name='sticky_notes'),
 ]
