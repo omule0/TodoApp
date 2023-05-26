@@ -70,6 +70,13 @@
           </tbody>
         </table>
       </div>
+      <div class="card-footer border-0 py-5">
+        <div class="card-header">
+          <a class="btn btn-sm
+          btn-outline-danger" href="{% url 'delete_old_weekly_tasks' %}">Delete Old
+            Weekly tasks</a>
+        </div>
+      </div>
     </div>
 
     <style>
@@ -77,5 +84,9 @@
         text-decoration: line-through;
       }
     </style>
+
+    <header>
+      <title>{% block title %} Weekly Tasks{% endblock title %}</title>
+    </header>
 
     {% endblock content %}

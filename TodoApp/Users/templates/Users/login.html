@@ -1,23 +1,21 @@
-<!doctype html>
-<html>
-
 {% load crispy_forms_tags %}
 {% block content %}
 {% load static %}
-
 <body>
     <div class="container mt-5 mb-5">
         <div class="d-flex flex row g-0">
             <div class="col-md-6 mt-3">
-                <div class="card card2 p-3">
+                <div class="card card2 p-5">
                     <div class="image">
-                        <img src="{% static 'Login_image.jpg' %}" alt="Login image" style="">
+                        <img src="{% static 'Login_image.jpg' %}" alt="Login image" style="width: 80%; height: 80%; margin: auto;">
                     </div>
                 </div>
             </div>
             <div class="col-md-6 mt-3">
                 <div class="card card1 p-3">
                     <div class="d-flex flex-column"><img src="{% static 'Logo_todoApp.png' %}" height="50" width="50" />
+                        <h6 class="mb-3">TodoApp</h6>
+                        <br>
                         <span class="login mt-3">Log in</span> </div>
                     <div class="login-form">
                         <form method="POST">
@@ -42,8 +40,6 @@
             </div>
         </div>
 </body>
-{% endblock content %}
-
 <head>
     <meta charset='utf-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
@@ -53,5 +49,6 @@
     <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
     <link rel="stylesheet" type="text/css" href="{% static '/css/login.css' %}">
 </head>
+{% endblock content %}
 
-</html>
+

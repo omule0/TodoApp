@@ -4,36 +4,35 @@
 {% load static %}
 
 <body>
-    <div class="container px-4 py-5 mx-auto">
-        <div class="card card0">
-            <div class="d-flex flex-lg-row flex-column-reverse">
-                <div class="card card2">
+    <div class="container mt-5 mb-5">
+        <div class="d-flex flex row g-0">
+            <div class="col-md-6 mt-3">
+                <div class="card card2 p-5">
                     <img src="{% static 'Landing_page.png' %}" alt="Landing_image"
                         style="width: 80%; height: 300px; margin: auto;">
                 </div>
-                <div class="card card1">
+            </div>
+            <div class="col-md-6 mt-3">
+                <div class="card card1 p-3">
                     <div class="d-flex flex-column"> <img src="{% static 'Logo_todoApp.png' %}" height="50"
                             width="50" />
-                        <span class="name">TodoApp</span>
-                    </div>
-                    <div class="row justify-content-center my-auto">
-                        <div class="col-lg-8 my-5">
+                        <h6 class="mb-3">TodoApp</h6>
+                        <div class="row justify-content-center my-3">
                             <h3 class="mb-3">Welcome to Your TodoApp</h3>
-                            <small class="text-muted">A Place you can make you day a productive one<br>Just in a few
-                                steps</small>
-
-                            <div class="row justify-content-center my-3">
-                                <button class="btn btn-gray"><a href="login">Get Started</a></button>
-                            </div>
-                            <div class="row justify-content-center my-2">
-                                <small class="text-muted"> Looking foward to having you<br>Enjoy
-                                    You</small>
-                            </div>
+                            <P class="text">A Place you can make you day a productive one<br>Just in a few
+                                steps</P>
+                            <p class="text"> Looking forward to having you<br>Enjoy
+                                You</p>
+                        </div>
+                        <div class="row justify-content-center my-3">
+                            <a class='btn btn-sm
+                                        btn-outline-danger' href="login">Get Started</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </body>
 

@@ -125,6 +125,17 @@ def weekly(request):
 
     return render(request, 'weekly.html', {'lists': weekly_tasks, 'form': form, 'total_weekly_tasks': total_weekly_tasks})
 
+def delete_old_weekly_tasks(request):
+    # Calculate the date threshold for deleting old weekly tasks
+    threshold_date = datetime.now().date() - timedelta(days=7)  # Delete tasks older than 7 days
+
+    # Retrieve and delete the old weekly tasks
+    old_weekly_tasks = List.objects.filter(week_of__lt=threshold_date)
+    old_weekly_tasks.delete()
+
+    # Redirect to a specific URL after deleting the tasks
+    return redirect('weekly')  # Replace 'weekly' with the appropriate URL name
+
 @login_required
 def deleteList(request, item_id):
     task = List.objects.get(pk=item_id)

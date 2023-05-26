@@ -30,12 +30,8 @@
         </div>
     </div>
 </div>
-{% endblock content %}
 
-<style>
-    h2 {
-    font-size: 2rem;
-    font-weight: bold;
-}
-</style>
-<link href="https://unpkg.com/@webpixels/css/dist/index.css" rel="stylesheet" />
+<header>
+    <title>{% block title %} Profile{% endblock title %}</title>
+  </header>
+{% endblock content %}

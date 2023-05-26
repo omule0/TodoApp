@@ -16,5 +16,6 @@ urlpatterns = [
         path('week_crossoff/<int:item_id>', views.week_cross_off, name='week_cross_off'),
         path('weekuncross/<int:item_id>', views.weekuncross, name='weekuncross'),
         path('deleteList/<int:item_id>/',views.deleteList, name='deleteList'),
+        path('delete_old_weekly_tasks/', views.delete_old_weekly_tasks, name='delete_old_weekly_tasks'),
         path('home/sticky_notes/', views.sticky_notes, name='sticky_notes'),
 ]

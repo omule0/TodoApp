@@ -1,17 +1,24 @@
-
-
-{% block title %}
-   | Edit
-{% endblock title %}
-{% load static %}
+{% extends 'base.html' %}
 {% load crispy_forms_tags %}
 
 {% block content %}
-    <div class="content">
+<div class="card">
+    <div class="card-header">
+      <h5>Edit</h5>
+    </div>
+    <div class="card-body">
+      <div class="content">
         <form class="form my-2 my-lg-0" method="POST">
             {% csrf_token %}
             {% crispy form %}
         </form>
     </div>
+    </div>
+  </div>
+
+  <header>
+    <title>{% block title %} Edit Task{% endblock title %}</title>
+  </header>
+
 {% endblock content %}
 
