@@ -12,6 +12,7 @@ from django.utils import timezone
 # Create your views here.
 @login_required
 def sticky_notes(request):
+    messages.success(request, (' Welcome to your sticky notes'))
     return render(request, 'sticky_notes.html')
 
 def landing_page(request):
@@ -26,6 +27,7 @@ def home(request):
             task = form.save(commit=False)
             task.user = request.user
             task.save()
+            messages.success(request, ('The task has been added to list successfully!'))
     else:
         form = TaskForm()
     tasks = Task.objects.filter(user=request.user)
@@ -46,6 +48,7 @@ def add_task(request):
 def deleteTask(request, name_id):
     task = Task.objects.get(pk=name_id)
     task.delete()
+    messages.success(request, ('The task has been deleted successfully!'))
     return redirect('/home')
 
 @login_required
@@ -54,7 +57,7 @@ def updateTask(request, name_id):
     if request.method == 'POST':
         form = TaskForm(request.POST, instance=task)
         if form.is_valid():
-            task.save()
+            messages.success(request, ('The task has been edited successfully!'))
             return redirect('/home')
     else:
         form = TaskForm(instance=task)
@@ -65,6 +68,7 @@ def cross_off(request, name_id):
     task = Task.objects.get(pk=name_id)
     task.completed = True
     task.save()
+    messages.success(request, ('The task has been marked completed successfully!'))
     return redirect('home')
 
 @login_required
@@ -72,6 +76,7 @@ def uncross(request, name_id):
     task = Task.objects.get(pk=name_id)
     task.completed = False
     task.save()
+    messages.success(request, ('The task has been marked incomplete successfully!'))
     return redirect('home')
 
 @login_required
@@ -82,6 +87,9 @@ def delete_old_tasks(request):
         time_difference = current_time - task.created_at.replace(tzinfo=timezone.utc)
         if time_difference.days > 7:
             task.delete()
+            messages.success(request, ('Old tasks have been deleted successfully!'))
+        else:
+            messages.error(request, ('There are no old tasks to delete!'))
     return redirect('home')
 
 @login_required
@@ -94,6 +102,9 @@ def mark_skipped_tasks(request):
                 if due_datetime < current_datetime:
                     task.is_skipped = True
                     task.save() 
+                    messages.success(request, (' Tasks have been marked as skipped successfully!'))
+                else:
+                    messages.error(request, ('There are no tasks to be marked as skipped!'))
         return redirect('home')
 
 
@@ -110,6 +121,9 @@ def weekly(request):
             task = form.save(commit=False)
             task.user = request.user
             task.save()
+            messages.success(request, ('The task has been added to list successfully!'))
+        else:
+            messages.error(request, ('The task has not been added.'))
     else:
         form = ListForm()
 
@@ -132,7 +146,7 @@ def delete_old_weekly_tasks(request):
     # Retrieve and delete the old weekly tasks
     old_weekly_tasks = List.objects.filter(week_of__lt=threshold_date)
     old_weekly_tasks.delete()
-
+    messages.success(request, (' Old Weekly tasks have been deleted successfully!'))
     # Redirect to a specific URL after deleting the tasks
     return redirect('weekly')  # Replace 'weekly' with the appropriate URL name
 
@@ -140,6 +154,7 @@ def delete_old_weekly_tasks(request):
 def deleteList(request, item_id):
     task = List.objects.get(pk=item_id)
     task.delete()
+    messages.success(request, ('The task has been deleted successfully!'))
     return redirect('weekly')
 
 @login_required
@@ -147,6 +162,7 @@ def week_cross_off(request, item_id):
     task = List.objects.get(pk=item_id)
     task.completed = True
     task.save()
+    messages.success(request, ('The task has been marked as completed successfully!'))
     return redirect('weekly')
 
 @login_required
@@ -154,6 +170,7 @@ def weekuncross(request,item_id):
     task = List.objects.get(pk=item_id)
     task.completed = False
     task.save()
+    messages.success(request, ('The task has been marked as incomplete successfully!'))
     return redirect('weekly')
 
 @login_required
@@ -161,4 +178,5 @@ def tasks_today(request):
     today = timezone.now().date()
     tasks = Task.objects.filter(due_date=today)
     upcoming_tasks = Task.objects.filter(due_date=today).count()
+    messages.success(request, (' Here are the tasks you have today'))
     return render(request, 'upcoming.html', {'tasks': tasks,'upcoming_tasks':upcoming_tasks})
