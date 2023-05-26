@@ -96,8 +96,14 @@ def mark_skipped_tasks(request):
                     task.save() 
         return redirect('home')
 
+
+
+from django.db.models import Q
+
 @login_required
 def weekly(request):
+    now = datetime.now().date()  # Get the current date
+
     if request.method == 'POST':
         form = ListForm(request.POST)
         if form.is_valid():
@@ -106,10 +112,18 @@ def weekly(request):
             task.save()
     else:
         form = ListForm()
-    
-    lists= List.objects.filter(user=request.user)
-    total_Weekly_tasks = List.objects.filter(user=request.user).count()
-    return render(request, 'weekly.html', {'lists': lists, 'form': form, 'total_Weekly_tasks': total_Weekly_tasks}) 
+
+    # Calculate the start and end dates for the current week
+    start_date = now - timedelta(days=now.weekday())  # Get the start of the week (Monday)
+    end_date = start_date + timedelta(days=6)  # Get the end of the week (Sunday)
+
+    # Retrieve all weekly tasks for the current day of the week or tasks that have due dates within the current week
+    current_day = now.strftime('%A')
+    weekly_tasks = List.objects.filter(Q(week_of=current_day) | Q(due_week__range=[start_date, end_date]), user=request.user)
+
+    total_weekly_tasks = weekly_tasks.count()
+
+    return render(request, 'weekly.html', {'lists': weekly_tasks, 'form': form, 'total_weekly_tasks': total_weekly_tasks})
 
 @login_required
 def deleteList(request, item_id):

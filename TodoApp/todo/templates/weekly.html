@@ -5,7 +5,7 @@
 <div class="card">
   <div class="card-header">
     <h5>Weekly Tasks<span class="badge bg-opacity-30 bg-primary text-primary
-        rounded-pill d-inline-flex align-items-center ms-auto">{{ total_Weekly_tasks }}</span></h5>
+        rounded-pill d-inline-flex align-items-center ms-auto">{{ total_weekly_tasks }}</span></h5>
     <div class="text-sm-end">
       <div class="mx-n1">
         <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#AddTask">Add a
@@ -37,7 +37,8 @@
             <tr>
               <th scope="col">Status</th>
               <th scope="col">Task Name</th>
-              <th scope="col">Due Time</th>
+              <th scope="col">Due Time and Due Week</th>
+              <th scope="col">Day</th>
               <th scope="col">Actions</th>
               <th scope="col">Delete</th>
             </tr>
@@ -48,7 +49,8 @@
             <tr>
               <td><i class="fas fa-check"></i></td>
               <td class="striker">{{ list.item }}</td>
-              <td class="striker">{{ list.due_time }}</td>
+              <td class="striker">{{ list.due_time }}and {{ list.due_week }}</td>
+              <td class="striker">{{ list.week_of }}</td>
               <td><a href="{% url 'weekuncross' list.id %}" class="btn btn-sm
                             btn-outline-secondary">uncross</a></td>
               <td><a href="{% url 'deleteList' list.id %}" class="btn btn-sm btn-danger">Delete</a></td>
@@ -57,7 +59,8 @@
             <tr>
               <td><i class="fas fa-spinner"></i></td>
               <td>{{ list.item }}</td>
-              <td>{{ list.due_time }}</td>
+              <td>{{ list.due_time }} and {{ list.due_week }}</td>
+              <td >{{ list.week_of }}</td>
               <td><a href="{% url 'week_cross_off' list.id %}" class="btn btn-sm
                             btn-outline-tertiary">crossoff</a></td>
               <td><a href="{% url 'deleteList' list.id %}" class="btn btn-sm btn-danger">Delete</a></td>
