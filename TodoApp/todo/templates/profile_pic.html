@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card">
+  <div class="card-body">
+    <div class="d-flex justify-content-center">
+      {% if user.profile %}
+      <img alt="Profile pic" src="{{ user.profile.image.url }}" >
+      {% endif %}
+    </div>
+
+    <div class="text-center my-6">
+      {% if user.is_authenticated %}
+      <span class="d-block text">Welcome, {{ user.username }}!</span>
+      <span class="d-block text">{{ user.email }}</span>
+
+      {% else %}
+      <p>Welcome, guest!</p>
+      {% endif %}
+
+      <span class="d-block text-sm text-muted"></span>
+    </div>
+    <header>
+      <title>{% block title %} Profile Pic{% endblock title %}</title>
+    </header>
+    {% endblock content %}

@@ -59,9 +59,9 @@
                   {% else %}
                   <tr>
                     <td><i class="fas fa-spinner"></i></td>
-                    <td>{{ task.name }}</td>
-                    <td>{{ task.due_date }}</td>
-                    <td>{{ task.due_time }}</td>
+                    <td> <span class="badge rounded-pill bg-primary">{{ task.name }}</span></td>
+                  <td><span class=" badge rounded-pill bg-info">{{ task.due_date }}</span></td>
+                  <td><span class="badge rounded-pill bg-tertiary">{{ task.due_time }}</span></td>
                     <td>
                       <a href="{% url 'updateTask' task.id %}" class="btn btn-sm
                           btn-outline-primary">Edit</a>

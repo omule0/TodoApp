@@ -31,7 +31,7 @@ def profile(request):
             u_form.save()
             p_form.save()
             messages.success(request, f"Your account Info has been Updated")
-            return redirect('home')
+            return redirect('profile_pic')
     else:
         u_form = UserUpdateForm(instance=request.user)
         try:
@@ -42,8 +42,3 @@ def profile(request):
     context = {"u_form": u_form,
                'p_form': p_form}
     return render(request, "Users/profile.html", context)
-
-
-def home(request):
-    return render(request, 'home.html')
-

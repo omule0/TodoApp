@@ -58,9 +58,9 @@
             {% else %}
             <tr>
               <td><i class="fas fa-spinner"></i></td>
-              <td>{{ list.item }}</td>
-              <td>{{ list.due_time }} and {{ list.due_week }}</td>
-              <td >{{ list.week_of }}</td>
+              <td><span class="badge rounded-pill bg-primary">{{ list.item }}</span></td>
+              <td><span class="badge rounded-pill bg-secondary text-dark">{{ list.due_time }} and {{ list.due_week }}</span></td>
+              <td ><span class="badge rounded-pill bg-warning">{{ list.week_of }}</span></td>
               <td><a href="{% url 'week_cross_off' list.id %}" class="btn btn-sm
                             btn-outline-tertiary">crossoff</a></td>
               <td><a href="{% url 'deleteList' list.id %}" class="btn btn-sm btn-danger">Delete</a></td>

@@ -58,7 +58,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="profile_pic">
               <i class="fas fa-message"></i>
               <i class="bi bi-chat"></i> Messages
               <span class="badge bg-opacity-30 bg-primary text-primary
@@ -176,7 +176,7 @@
                 {% if task.completed %}
                 <tr>
                   <td><i class="fas fa-check"></i></td>
-                  <td class="striker">{{ task.name }}</td>
+                  <td class="striker"> {{ task.name }}</td>
                   <td class="striker">{{ task.due_date }}</td>
                   <td class="striker">{{ task.due_time }}</td>
                   <td>
@@ -217,9 +217,9 @@
                 {% else %}
                 <tr>
                   <td><i class="fas fa-spinner"></i></td>
-                  <td>{{ task.name }}</td>
-                  <td>{{ task.due_date }}</td>
-                  <td>{{ task.due_time }}</td>
+                  <td> <span class="badge rounded-pill bg-primary">{{ task.name }}</span></td>
+                  <td><span class=" badge rounded-pill bg-info">{{ task.due_date }}</span></td>
+                  <td><span class="badge rounded-pill bg-tertiary">{{ task.due_time }}</span></td>
                   <td>
                     <button type="button" class="btn btn-sm btn-outline-info" data-toggle="modal"
                       data-target="#Description{{ task.id }}">Description</button>
@@ -288,8 +288,8 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-light"><a class="far fa-trash-can"
-                        href="{% url 'deleteTask' task.id %}"></a></button>
+                    <a class="far fa-trash-can"
+                        href="{% url 'deleteTask' task.id %}"></a>
                   </div>
                 </div>
               </div>

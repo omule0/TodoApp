@@ -180,3 +180,11 @@ def tasks_today(request):
     upcoming_tasks = Task.objects.filter(due_date=today).count()
     messages.success(request, (' Here are the tasks you have today'))
     return render(request, 'upcoming.html', {'tasks': tasks,'upcoming_tasks':upcoming_tasks})
+
+@login_required
+def profile_pic(request):
+    if request.user.is_authenticated:
+        user = request.user
+        return render(request, 'profile_pic.html', {'user': user})
+    else:
+        return render(request, 'profile_pic.html')
