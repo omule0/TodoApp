@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Edit Tasks</title>
+	<style>
+        body {
+			font-family: Arial, sans-serif;
+			text-align: center;
+			background-color: #f2f2f2;
+		}
+		.container {
+            margin: 0 auto;
+			width: 60%;
+			background-color: #a3d8dbc5;
+			padding: 30px;
+			box-shadow: 0 0 5px 0 #b1edf1;
+		}
+        .header {
+			font-size: 24px;
+			font-weight: bold;
+			color: #444;
+		}
+		.content {
+			font-size: 16px;
+			color: #666;
+			line-height: 0.5;
+		}
+        form {
+			margin-top: 20px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+		label {
+			display: block;
+			margin-bottom: 10px;
+		}
+		input[type="text"],
+		input[type="date"],
+		input[type="time"],
+		select,
+        textarea {
+			padding: 10px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			width: 70%;
+			margin-bottom: 20px;
+			box-sizing: border-box;
+			font-size: 16px;
+			color: #333;
+		}
+        button[type="submit"],
+		button[type="button"] {
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			background-color: #0077c2;
+			color: #fff;
+			font-size: 16px;
+			cursor: pointer;
+			margin-top: 20px;
+			margin-right: 10px;
+		}
+        button[type="submit"]:hover,
+		button[type="button"]:hover {
+			background-color: #00538c;
+		}
+    </style>
+	<link rel="stylesheet" href="style.min.css" media="all">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<body>
+	<div class="container">
+		<div class="header">
+			Edit Tasks
+		</div>
+		<form id="edit-form">
+			<label for="task-name">Task Name:</label>
+			<input type="text" id="task-name" name="task-name" required aria-label="Task Name"><br>
+            <label for="date"> Due Date:</label>
+			<input type="date" id="due-date" name="date" required aria-label="Date"><br>
+
+			<label for="time"> Due Time:</label>
+			<input type="time" id="time" name="time" required aria-label="Time"><br>
+
+			<label for="reminder">Reminder:</label>
+			<select id="reminder" name="reminder">
+				<option value="0">None</option>
+				<option value="15">15 minutes</option>
+				<option value="30">30 minutes</option>
+				<option value="60">1 hour</option>
+			</select><br>
+            
+			<button type="submit" aria-label="Save Changes">Save Changes</button>
+			<button type="button" aria-label="Cancel" onclick="history.back()">Cancel</button>
+		</form>
+    <div id="tasks">
+      <!-- Tasks will be displayed here -->
+  </div>
+	</div>
+
+    <script>
+        // Retrieve form element and attach event listener for submit event
+        var editForm = document.getElementById('edit-form');
+        editForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+      
+        // Retrieve input values from form fields
+        var taskName = document.getElementById('task-name').value;
+        var date = document.getElementById('due-date').value;
+        var time = document.getElementById('due-time').value;
+        var reminder = document.getElementById('reminder').value;
+        
+        // Send AJAX request to server to save changes
+        var xhr = new XMLHttpRequest();
+			xhr.open('POST', 'save_changes.php', true);
+			xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+			xhr.onload = function() {
+				if (xhr.status === 200 && xhr.responseText === 'success') {
+					// Show success message to user and redirect back to original page
+					Swal.fire({
+						title: 'Changes saved!',
+						icon: 'success',
+						timer: 2000,
+						showConfirmButton: false
+					}).then(function() {
+						window.location.href = 'add_task.html';
+					});
+                } else {
+					// Show error message to user
+					Swal.fire({
+						title: 'Error saving changes',
+						icon: 'error'
+					});
+				}
+			};
+			xhr.send('taskName=' + encodeURIComponent(taskName) + '&date=' + encodeURIComponent(date) + '&time=' + encodeURIComponent(time) + '&reminder=' + encodeURIComponent(reminder));
+		});
+        
+		// Retrieve form data and prefill form fields when page is loaded
+  // Make an AJAX request to the server to retrieve the form data
+  window.onload = getValues();
+  function getValues(){
+	  const query = window.location.search
+	//   console.log(query)
+	  const urlParams = new URLSearchParams(query); // ?name=papa&date=2023-05-16&
+	  const name = urlParams.get('name');
+	  const date = urlParams.get('date');
+	//   console.log(name);
+	//   console.log(date);
+	  document.getElementById('task-name').value = name;
+    	document.getElementById('due-date').value = date;
+  }
+</script>
