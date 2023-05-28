@@ -193,6 +193,20 @@ def profile_pic(request):
 
 @login_required
 def send_task_reminder(request):
+    # Get the tasks that are about to be due
+    tasks = Task.objects.filter(user=request.user, is_skipped=False)
+    current_datetime = timezone.now()
+    
+    # Send reminder emails for each task
+    for task in tasks:
+        remind_minutes = task.remind_minutes
+        due_datetime = datetime.combine(task.due_date, task.due_time)
+        due_datetime = make_aware(due_datetime)
+        
+        # Calculate the reminder time
+        reminder_time = due_datetime - timedelta(minutes=remind_minutes)
+        
+        if current_datetime >= reminder_time and current_datetime < due_datetime:
             send_mail(
                 'Task Reminder',  # Subject
                 f"Your task '{task.name}' is about to be due.",  # Body
@@ -200,3 +214,5 @@ def send_task_reminder(request):
                 [request.user.email],  # Recipient's email (in this case, the logged-in user)
                 fail_silently=False,
             )
+    
+    return render(request, 'messages.html', {'tasks': tasks})
