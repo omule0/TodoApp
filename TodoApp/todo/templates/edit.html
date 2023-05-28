@@ -142,4 +142,14 @@
 		// Retrieve form data and prefill form fields when page is loaded
   // Make an AJAX request to the server to retrieve the form data
   window.onload = getValues();
-  
+  function getValues(){
+	  const query = window.location.search
+	//   console.log(query)
+	  const urlParams = new URLSearchParams(query); // ?name=papa&date=2023-05-16&
+	  const name = urlParams.get('name');
+	  const date = urlParams.get('date');
+	//   console.log(name);
+	//   console.log(date);
+	  document.getElementById('task-name').value = name;
+    	document.getElementById('due-date').value = date;
+  }
