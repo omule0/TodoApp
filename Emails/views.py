@@ -1,3 +1,13 @@
+from django.core.mail import send_mail
+from django.conf import Settings
+
+
+
+
+
+
+
+
 # send email to user
             send_mail(
                 'New Task Created',#message header/subject
