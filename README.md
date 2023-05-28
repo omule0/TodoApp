@@ -9,3 +9,13 @@ Our app also allows you to delete any task that you no longer need. To ensure op
 
 REQUIREMENTS:
 We are building a web application using Django, a high-level Python web framework that facilitates rapid development and clean, pragmatic design. Our app aims to provide a minimalistic user interface while delivering a robust, reliable back-end system.For the front-end, we will be using standard web development tools like JavaScript, HTML, and CSS. 
+
+Create virtual environment: py -m venv venv
+Activate it: venv\Scripts\activate
+Deactivate it :deactivate 
+Get dependenices used: pip freeze > requirements.txt
+Docker build image: docker build -t sdp.
+Docker tag as per the docker hub repository name
+:docker tag sdp m3lv1n/sdp:sdp
+Login:docker login
+docker push to repository:docker push m3lv1n/sdp:sdp
