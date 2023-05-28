@@ -9,12 +9,6 @@ def task_create(request):
             task.user = request.user
             task.save()
 
-
-
-
-
-
-
 # send email to user
             send_mail(
                 'New Task Created',#message header/subject
@@ -23,3 +17,7 @@ def task_create(request):
                 [request.user.email],   # send email to logged-in user
                 fail_silently=False,
             )
+                    return redirect('task_list')
+    else:
+        form = TaskingForm()
+    return render(request, 'task_form.html', {'form': form, 'form_title': 'form_title'})
