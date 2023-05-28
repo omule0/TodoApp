@@ -1,6 +1,13 @@
 from django.core.mail import send_mail
 from django.conf import Settings
-
+@login_required
+def task_create(request):
+    if request.method == 'POST':
+        form = TaskingForm(request.POST)
+        if form.is_valid():
+            task = form.save(commit=False)
+            task.user = request.user
+            task.save()
 
 
 
