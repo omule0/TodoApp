@@ -128,3 +128,13 @@
 					}).then(function() {
 						window.location.href = 'add_task.html';
 					});
+                } else {
+					// Show error message to user
+					Swal.fire({
+						title: 'Error saving changes',
+						icon: 'error'
+					});
+				}
+			};
+			xhr.send('taskName=' + encodeURIComponent(taskName) + '&date=' + encodeURIComponent(date) + '&time=' + encodeURIComponent(time) + '&reminder=' + encodeURIComponent(reminder));
+		});
