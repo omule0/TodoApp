@@ -9,6 +9,8 @@ from .forms import TaskForm,ListForm
 from datetime import datetime, timedelta, timezone
 from django.contrib import messages
 from django.utils import timezone
+from django.core.mail import send_mail
+from django.utils.timezone import make_aware
 # Create your views here.
 @login_required
 def sticky_notes(request):
@@ -188,3 +190,13 @@ def profile_pic(request):
         return render(request, 'profile_pic.html', {'user': user})
     else:
         return render(request, 'profile_pic.html')
+
+@login_required
+def send_task_reminder(request):
+            send_mail(
+                'Task Reminder',  # Subject
+                f"Your task '{task.name}' is about to be due.",  # Body
+                'melvinmichael348@gmail.com',  # Sender's email
+                [request.user.email],  # Recipient's email (in this case, the logged-in user)
+                fail_silently=False,
+            )

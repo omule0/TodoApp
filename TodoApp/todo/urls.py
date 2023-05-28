@@ -19,4 +19,5 @@ urlpatterns = [
         path('delete_old_weekly_tasks/', views.delete_old_weekly_tasks, name='delete_old_weekly_tasks'),
         path('home/sticky_notes/', views.sticky_notes, name='sticky_notes'),
         path('home/profile_pic/', views.profile_pic, name='profile_pic'),
+        path('home/messages/', views.send_task_reminder, name='send_task_reminder'),
 ]
