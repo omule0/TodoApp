@@ -193,26 +193,22 @@ def profile_pic(request):
 
 @login_required
 def send_task_reminder(request):
-    # Get the tasks that are about to be due
-    tasks = Task.objects.filter(user=request.user, is_skipped=False)
-    current_datetime = timezone.now()
-    
-    # Send reminder emails for each task
+    tasks = Task.objects.filter(user=request.user, completed=False, is_skipped=False)
     for task in tasks:
-        remind_minutes = task.remind_minutes
-        due_datetime = datetime.combine(task.due_date, task.due_time)
-        due_datetime = make_aware(due_datetime)
-        
-        # Calculate the reminder time
-        reminder_time = due_datetime - timedelta(minutes=remind_minutes)
-        
-        if current_datetime >= reminder_time and current_datetime < due_datetime:
+        time_delta = timezone.now() - task.created_at
+        if task.remind_minutes and time_delta.total_seconds() > task.remind_minutes * 60:
             send_mail(
-                'Task Reminder',  # Subject
-                f"Your task '{task.name}' is about to be due.",  # Body
-                'melvinmichael348@gmail.com',  # Sender's email
-                [request.user.email],  # Recipient's email (in this case, the logged-in user)
+                'Reminder: {} is due soon!'.format(task.name),
+                'This is a reminder that your task "{}"" is due in {} minute.'.format(
+                    task.name, task.remind_minutes
+                ),
+                'melvinmichael348@gmail.com',
+                [request.user.email],
                 fail_silently=False,
             )
-    
-    return render(request, 'messages.html', {'tasks': tasks})
+            task.is_skipped = True  # Set to true so we don't send another reminder
+            task.save()
+            messages.success(request, ('The task reminder has been sent successfully!'))
+        else:
+            messages.error(request, ('There are no tasks to send reminders for!'))
+    return redirect('home')

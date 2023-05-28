@@ -19,3 +19,5 @@ Docker tag as per the docker hub repository name
 :docker tag sdp m3lv1n/sdp:sdp
 Login:docker login
 docker push to repository:docker push m3lv1n/sdp:sdp
+
+pip install django-background-tasks
