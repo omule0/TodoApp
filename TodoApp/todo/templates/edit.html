@@ -112,3 +112,19 @@
         var date = document.getElementById('due-date').value;
         var time = document.getElementById('due-time').value;
         var reminder = document.getElementById('reminder').value;
+        
+        // Send AJAX request to server to save changes
+        var xhr = new XMLHttpRequest();
+			xhr.open('POST', 'save_changes.php', true);
+			xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+			xhr.onload = function() {
+				if (xhr.status === 200 && xhr.responseText === 'success') {
+					// Show success message to user and redirect back to original page
+					Swal.fire({
+						title: 'Changes saved!',
+						icon: 'success',
+						timer: 2000,
+						showConfirmButton: false
+					}).then(function() {
+						window.location.href = 'add_task.html';
+					});
