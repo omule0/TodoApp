@@ -1,3 +1,4 @@
+##This is an example of a function where you can insert the send email function message.
 from django.core.mail import send_mail
 from django.conf import Settings
 @login_required
