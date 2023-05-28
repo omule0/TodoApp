@@ -100,10 +100,15 @@
       <!-- Tasks will be displayed here -->
   </div>
 	</div>
-    
+
     <script>
         // Retrieve form element and attach event listener for submit event
         var editForm = document.getElementById('edit-form');
         editForm.addEventListener('submit', function(event) {
             event.preventDefault();
       
+        // Retrieve input values from form fields
+        var taskName = document.getElementById('task-name').value;
+        var date = document.getElementById('due-date').value;
+        var time = document.getElementById('due-time').value;
+        var reminder = document.getElementById('reminder').value;
