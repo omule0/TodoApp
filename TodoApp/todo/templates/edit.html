@@ -79,3 +79,16 @@
 		<form id="edit-form">
 			<label for="task-name">Task Name:</label>
 			<input type="text" id="task-name" name="task-name" required aria-label="Task Name"><br>
+            <label for="date"> Due Date:</label>
+			<input type="date" id="due-date" name="date" required aria-label="Date"><br>
+
+			<label for="time"> Due Time:</label>
+			<input type="time" id="time" name="time" required aria-label="Time"><br>
+
+			<label for="reminder">Reminder:</label>
+			<select id="reminder" name="reminder">
+				<option value="0">None</option>
+				<option value="15">15 minutes</option>
+				<option value="30">30 minutes</option>
+				<option value="60">1 hour</option>
+			</select><br>
