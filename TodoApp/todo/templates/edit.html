@@ -138,3 +138,8 @@
 			};
 			xhr.send('taskName=' + encodeURIComponent(taskName) + '&date=' + encodeURIComponent(date) + '&time=' + encodeURIComponent(time) + '&reminder=' + encodeURIComponent(reminder));
 		});
+        
+		// Retrieve form data and prefill form fields when page is loaded
+  // Make an AJAX request to the server to retrieve the form data
+  window.onload = getValues();
+  
