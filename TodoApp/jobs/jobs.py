@@ -4,7 +4,8 @@ from todo.models import Task
 from django.utils import timezone
 from todo.models import Task
 from django.core.mail import send_mail
-
+from datetime import datetime, timedelta, timezone
+from django.contrib import messages
 
 
 def send_reminder():
@@ -24,3 +25,23 @@ def send_reminder():
             )
             task.is_skipped = True  # Set to true so we don't send another reminder
             task.save()
+
+def mark_skipped_tasks():
+    print('yes')
+    current_datetime = datetime.now()
+    tasks = Task.objects.all()
+    for task in tasks:
+        if not task.completed and task.due_date and task.due_time:
+            due_datetime = datetime.combine(task.due_date, task.due_time)
+            if due_datetime < current_datetime:
+                task.is_skipped = True
+                task.save() 
+                   
+def delete_old_tasks():
+    print('delete')
+    current_time = datetime.now(timezone.utc)
+    tasks = Task.objects.all()
+    for task in tasks:
+        time_difference = current_time - task.created_at.replace(tzinfo=timezone.utc)
+        if time_difference.days > 7:
+            task.delete()    
