@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>{% block title %}Todo App{% endblock %}</title>
+  ## This is where the calendar thing starts from ##
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
   #This tag loads the Moment.js library from a CDN, which is used to parse and format dates and times.
@@ -27,6 +28,7 @@
   </nav>
   <main>
     {% block content %}
+    ## The calendar then continues from here  to the end##
     <div id='calendar'></div>
     #This tag defines a div element with an ID of "calendar" where the FullCalendar plugin will render the calendar.
     <script>
