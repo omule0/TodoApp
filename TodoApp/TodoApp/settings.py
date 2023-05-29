@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'Users',
     'todo',
+    'django_apscheduler',
 ]
 
 MIDDLEWARE = [
@@ -139,3 +140,5 @@ EMAIL_PORT = 587#port number for Gmail Users
 EMAIL_USE_TLS = True
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
+APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"
+APSCHEDULER_RUN_NOW = True

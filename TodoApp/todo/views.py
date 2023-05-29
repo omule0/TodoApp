@@ -192,22 +192,5 @@ def profile_pic(request):
 
 @login_required
 def send_task_reminder(request):
-    tasks = Task.objects.filter(user=request.user, completed=False, is_skipped=False)
-    for task in tasks:
-        time_delta = timezone.now() - task.created_at
-        if task.remind_minutes and time_delta.total_seconds() > task.remind_minutes * 60:
-            send_mail(
-                'Reminder: {} is due soon!'.format(task.name),
-                'This is a reminder that your task "{}"" is due in {} minute.'.format(
-                    task.name, task.remind_minutes
-                ),
-                'melvinmichael348@gmail.com',
-                [request.user.email],
-                fail_silently=False,
-            )
-            task.is_skipped = True  # Set to true so we don't send another reminder
-            task.save()
-            messages.success(request, ('The task reminder has been sent successfully!'))
-        else:
-            messages.error(request, ('There are no tasks to send reminders for!'))
+    messages.success(request, ('The task reminder job has been scheduled successfully!'))
     return redirect('home')
