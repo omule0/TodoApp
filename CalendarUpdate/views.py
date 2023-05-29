@@ -1,10 +1,10 @@
 from django.utils.safestring import mark_safe
 from django.utils import timezone
-import calendar
+import calendar #imports Python's built-in calendar module
 import datetime
 @login_required
 def task_list(request, year=None, month=None):
-    if not year and not month:
+    if not year and not month: #checks if both year and month are not provided
         year = datetime.datetime.now().year
         month = datetime.datetime.now().month
     else:
