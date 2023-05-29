@@ -4,8 +4,11 @@
   <title>{% block title %}Todo App{% endblock %}</title>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  #This tag loads the Moment.js library from a CDN, which is used to parse and format dates and times.
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
+  #This tag loads a CSS stylesheet for the FullCalendar plugin from a CDN.
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+  #This tag loads the FullCalendar plugin from a CDN.
 </head>
 <body>
   <nav>
@@ -25,6 +28,7 @@
   <main>
     {% block content %}
     <div id='calendar'></div>
+    #This tag defines a div element with an ID of "calendar" where the FullCalendar plugin will render the calendar.
     <script>
       $(document).ready(function() {
         var events = [
