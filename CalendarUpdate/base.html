@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{% block title %}Todo App{% endblock %}</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+</head>
+<body>
+  <nav>
+    <ul>
+        <li><a href="{% url 'home' %}">Task List</a></li>
+      {% if user.is_authenticated %}
+        <li><a href="{% url 'todo_list' %}">Task List</a></li>
+        <li><a href="{% url 'task_create' %}">Task  Create</a></li>
+        <li><a href="{% url 'logout' %}">Logout</a></li>
+        <li><a href="#">Welcome, {{ user.username }}</a></li>
+      {% else %}
+        <li><a href="{% url 'login' %}">Login</a></li>
+        <li><a href="{% url 'register' %}">Register</a></li>
+      {% endif %}
+    </ul>
+  </nav>
+  <main>
+    {% block content %}
+    <div id='calendar'></div>
+    <script>
+      $(document).ready(function() {
+        var events = [
+          {% for task in tasks %}
+            {
+              title: '{{ task.title }}',
+              start: '{{ task.due_date }}'
+            },
+          {% endfor %}
+        ];
+        $('#calendar').fullCalendar({
+          events: events
+        });
+      });
+    </script>
+    {% endblock %}
+  </main>
+</body>
+</html>
