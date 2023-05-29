@@ -1,33 +1,33 @@
 from django.conf import settings
 import json
-from todo.models import Task
 from django.utils import timezone
-from todo.models import Task
+from todo.models import Task ,List
 from django.core.mail import send_mail
 from datetime import datetime, timedelta, timezone
-from django.contrib import messages
-
+from django.urls import reverse
 
 def send_reminder():
-    print('okay')
     tasks = Task.objects.filter(completed=False, is_skipped=False)
+    
     for task in tasks:
         time_delta = timezone.now() - task.created_at
         if task.remind_minutes and time_delta.total_seconds() > task.remind_minutes * 60:
+            task_url = reverse('task_detail', args=[task.id])
             send_mail(
                 'Reminder: {} is due soon!'.format(task.name),
                 'This is a reminder that your task "{}" is due in {} minute.'.format(
                     task.name, task.remind_minutes
                 ),
+                 'Please visit the following link to view the task details: {}'.format(
+    task.name, task.remind_minutes, task_url
+),
                 'melvinmichael348@gmail.com',
                 [task.user.email],
                 fail_silently=False,
             )
-            task.is_skipped = True  # Set to true so we don't send another reminder
             task.save()
 
 def mark_skipped_tasks():
-    print('yes')
     current_datetime = datetime.now()
     tasks = Task.objects.all()
     for task in tasks:
@@ -38,10 +38,19 @@ def mark_skipped_tasks():
                 task.save() 
                    
 def delete_old_tasks():
-    print('delete')
     current_time = datetime.now(timezone.utc)
     tasks = Task.objects.all()
     for task in tasks:
         time_difference = current_time - task.created_at.replace(tzinfo=timezone.utc)
         if time_difference.days > 7:
             task.delete()    
+
+
+
+def delete_old_weekly_tasks():
+    # Calculate the date threshold for deleting old weekly tasks
+    threshold_date = datetime.now().date() - timedelta(days=7)  # Delete tasks older than 7 days
+
+    # Retrieve and delete the old weekly tasks
+    old_weekly_tasks = List.objects.filter(week_of__lt=threshold_date)
+    old_weekly_tasks.delete() 

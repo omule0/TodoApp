@@ -24,4 +24,4 @@ pip install django-background-tasks
 pip install apscheduler
 pip install django-apscheduler
 
-pip install celery
+

@@ -192,5 +192,11 @@ def profile_pic(request):
 
 @login_required
 def send_task_reminder(request):
-    messages.success(request, ('The task reminder job has been scheduled successfully!'))
-    return redirect('home')
+    tasks = Task.objects.filter(completed=False, is_skipped=False)
+    for task in tasks:
+        time_delta = timezone.now() - task.created_at
+        if task.remind_minutes and time_delta.total_seconds() > task.remind_minutes * 60:
+            task.save()
+        else:
+            messages.error(request, ('There are no tasks to send reminders for!'))
+    return render(request,'messages.html' )

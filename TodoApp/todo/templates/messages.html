@@ -7,18 +7,19 @@
 <head>
     <title>Task Reminder</title>
 </head>
-<body>
-    <h1>Task Reminder</h1>
-    <p>Dear User,</p>
-    <p>A task in your to-do list is about to be due:</p>
-    <ul>
-        {% for task in tasks %}
-        <li>{{ task.name }}</li>
-        {% endfor %}
-    </ul>
-    <p>Please complete the tasks before the due date.</p>
-    <p>Thank you!</p>
-</body>
-</html>
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Task Reminder</h5>
+        <p class="text">Dear User,</p>
+        <p class="text">A task in your to-do list is about to be due:</p>
+        <ul>
+            {% for task in tasks %}
+            <li>{{ task.name }}</li>
+            {% endfor %}
+        </ul>
+        <p class="text">Please complete the tasks before the due date.</p>
+        <p class="text">Thank you!</p>
+    </div>
+</div>
 {% endblock content %}
 ```
