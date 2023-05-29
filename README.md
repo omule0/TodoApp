@@ -22,5 +22,6 @@ docker push to repository:docker push m3lv1n/sdp:sdp
 
 pip install django-background-tasks
 pip install apscheduler
+pip install django-apscheduler
 
 pip install celery
