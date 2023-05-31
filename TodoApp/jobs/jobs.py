@@ -10,21 +10,18 @@ def send_reminder():
     tasks = Task.objects.filter(completed=False, is_skipped=False)
     
     for task in tasks:
-        time_delta = timezone.now() - task.created_at
+        time_delta = datetime.now(timezone.utc) - task.created_at
         if task.remind_minutes and time_delta.total_seconds() > task.remind_minutes * 60:
-            task_url = reverse('task_detail', args=[task.id])
             send_mail(
                 'Reminder: {} is due soon!'.format(task.name),
                 'This is a reminder that your task "{}" is due in {} minute.'.format(
                     task.name, task.remind_minutes
                 ),
-                 'Please visit the following link to view the task details: {}'.format(
-    task.name, task.remind_minutes, task_url
-),
                 'melvinmichael348@gmail.com',
                 [task.user.email],
                 fail_silently=False,
             )
+            task.is_skipped = True
             task.save()
 
 def mark_skipped_tasks():

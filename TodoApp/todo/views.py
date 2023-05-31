@@ -10,6 +10,7 @@ from datetime import datetime, timedelta, timezone
 from django.contrib import messages
 from django.utils import timezone
 from django.core.mail import send_mail
+from datetime import datetime
 # Create your views here.
 @login_required
 def sticky_notes(request):
@@ -33,7 +34,7 @@ def home(request):
         form = TaskForm()
     tasks = Task.objects.filter(user=request.user)
     total_tasks = Task.objects.filter(user=request.user).count()
-    upcoming_tasks = Task.objects.filter(due_date=today).count()
+    upcoming_tasks = Task.objects.filter(due_date=today,completed=False, is_skipped=False).count()
     return render(request, 'home.html', {'tasks': tasks, 'form': form, 'total_tasks': total_tasks,'upcoming_tasks':upcoming_tasks})
 
 @login_required
@@ -93,9 +94,9 @@ def delete_old_tasks(request):
             messages.error(request, ('There are no old tasks to delete!'))
     return redirect('home')
 
-@login_required
+'''@login_required
 def mark_skipped_tasks(request):
-        current_datetime = datetime.now()
+        current_datetime = datetime.now(timezone.utc)
         tasks = Task.objects.all()
         for task in tasks:
             if not task.completed and task.due_date and task.due_time:
@@ -106,7 +107,7 @@ def mark_skipped_tasks(request):
                     messages.success(request, (' Tasks have been marked as skipped successfully!'))
                 else:
                     messages.error(request, ('There are no tasks to be marked as skipped!'))
-        return redirect('home')
+        return redirect('home')'''
 
 
 
@@ -114,7 +115,7 @@ from django.db.models import Q
 
 @login_required
 def weekly(request):
-    now = datetime.now().date()  # Get the current date
+    now = datetime.datetime.now(timezone.utc).date()  # Get the current date
 
     if request.method == 'POST':
         form = ListForm(request.POST)
@@ -177,8 +178,8 @@ def weekuncross(request,item_id):
 @login_required
 def tasks_today(request):
     today = timezone.now().date()
-    tasks = Task.objects.filter(due_date=today)
-    upcoming_tasks = Task.objects.filter(due_date=today).count()
+    tasks = Task.objects.filter(due_date=today,completed=False, is_skipped=False )
+    upcoming_tasks = tasks.count()
     messages.success(request, (' Here are the tasks you have today'))
     return render(request, 'upcoming.html', {'tasks': tasks,'upcoming_tasks':upcoming_tasks})
 

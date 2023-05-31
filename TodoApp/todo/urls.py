@@ -10,7 +10,7 @@ urlpatterns = [
         path('crossoff/<int:name_id>', views.cross_off, name='cross_off'),
         path('uncross/<int:name_id>', views.uncross, name='uncross'),
         path('delete_old_tasks/', views.delete_old_tasks, name='delete_old_tasks'),
-        path('mark_skipped_tasks/', views.mark_skipped_tasks, name='mark_skipped_tasks'),
+        #path('mark_skipped_tasks/', views.mark_skipped_tasks, name='mark_skipped_tasks'),
         path('home/upcoming/', views.tasks_today, name='tasks_today'),
         path('home/weekly/', views.weekly, name='weekly'),
         path('week_crossoff/<int:item_id>', views.week_cross_off, name='week_cross_off'),
@@ -20,5 +20,5 @@ urlpatterns = [
         path('home/sticky_notes/', views.sticky_notes, name='sticky_notes'),
         path('home/profile_pic/', views.profile_pic, name='profile_pic'),
         path('home/messages/', views.send_task_reminder, name='send_task_reminder'),
-        path('home/calendar/', views.calendars, name='calendars')
+        path('home/calendar/', views.calendars, name='calenders')
 ]
