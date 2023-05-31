@@ -1,0 +1,158 @@
+/* Calendar */
+.calendar {
+    width: 50%;
+  max-width: 800px;
+  height: 500px;
+  margin: 0 auto;
+  padding: 10px;
+  background-image: url('img/bgg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #fff;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  }
+  
+  .calendar h1 {
+    font-size: 2rem;
+    text-align: center;
+    padding: 1rem;
+    margin: 0;
+    background-color: #0077b6;
+    color: #fff;
+  }
+  
+  .calendar table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    text-align: center;
+    font-size: 1.2rem;
+  }
+  
+  .calendar thead th {
+    padding: 1rem;
+    background-color: #0077b6;
+    color: #fff;
+  }
+  
+  .calendar tbody td {
+    padding: 1rem;
+    vertical-align: top;
+    border: 1px solid #ccc;
+  }
+  
+  .calendar tbody td:hover {
+    background-color: blueviolet;
+  }
+  
+  .calendar tbody td.event {
+    background-color: #0077b6;
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  /* Add Event Form */
+  .add-event {
+    width: 50%;
+  max-width: 400px;
+  height: 500px;
+  background-color: #fff;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  background-image: url('img/cadd.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  bottom: 0;
+  left: 0;
+  right: 0
+  }
+  
+  .add-event, .h2 {
+    font-size: 1.5rem;
+    margin-top: 0;
+  }
+  
+  .add-event form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .add-event, .label {
+    margin-bottom: 0.5rem;
+  }
+  
+  .add-event input[type="text"],
+  .add-event input[type="date"] {
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 1rem;
+  }
+  
+  .add-event, .input[type="submit"] {
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: none;
+    background-color: #0077b6;
+    color: #fff;
+    cursor: pointer;
+    float: right;
+  }
+  button{
+    border-radius: 50px;
+    color: red;
+    font-size: 25px;
+    background-color: skyblue;
+    cursor: pointer;
+    border: none;
+    
+  }
+  button:hover {
+    background-color: gray;
+  }
+  /* Container */
+  .container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-top: 40px;
+    padding-right: 90px;
+  }
+
+  body{
+    background: blanchedalmond;
+    background-image: url('img/bbgg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+
+  .today {
+    background-color: rgb(255, 30, 0);
+  } 
+  .today:hover{
+    background-color: orange;
+  } 
+  .calendar tbody td.event {
+    background-color: lightblue;
+    color: white;
+    font-weight: bold;
+  }
+  
+ 
