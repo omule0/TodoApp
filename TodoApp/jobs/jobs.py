@@ -4,7 +4,7 @@ from django.utils import timezone
 from todo.models import Task ,List
 from django.core.mail import send_mail
 from datetime import datetime, timedelta, timezone
-from django.urls import reverse
+
 
 def send_reminder():
     tasks = Task.objects.filter(completed=False, is_skipped=False)
@@ -21,7 +21,7 @@ def send_reminder():
                 [task.user.email],
                 fail_silently=False,
             )
-            task.is_skipped = True
+            task.completed= True
             task.save()
 
 def mark_skipped_tasks():

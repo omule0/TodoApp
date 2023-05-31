@@ -56,14 +56,17 @@ def deleteTask(request, name_id):
 @login_required
 def updateTask(request, name_id):
     task = Task.objects.get(pk=name_id)
+    form = TaskForm(request.POST, instance=task)
     if request.method == 'POST':
         form = TaskForm(request.POST, instance=task)
         if form.is_valid():
+            form.save()
             messages.success(request, ('The task has been edited successfully!'))
             return redirect('/home')
     else:
         form = TaskForm(instance=task)
-    return render(request, 'update_task.html', {'form': form,})
+
+    return render(request, 'update_task.html', {'task': task, 'form': form})
 
 @login_required
 def cross_off(request, name_id):
@@ -83,7 +86,7 @@ def uncross(request, name_id):
 
 @login_required
 def delete_old_tasks(request):
-    current_time = datetime.now(timezone.utc)
+    current_time = datetime.datetime.now(timezone.utc)
     tasks = Task.objects.all()
     for task in tasks:
         time_difference = current_time - task.created_at.replace(tzinfo=timezone.utc)
@@ -143,7 +146,7 @@ def weekly(request):
 
 def delete_old_weekly_tasks(request):
     # Calculate the date threshold for deleting old weekly tasks
-    threshold_date = datetime.now().date() - timedelta(days=7)  # Delete tasks older than 7 days
+    threshold_date = datetime.datetime.now().date() - timedelta(days=7)  # Delete tasks older than 7 days
 
     # Retrieve and delete the old weekly tasks
     old_weekly_tasks = List.objects.filter(week_of__lt=threshold_date)
