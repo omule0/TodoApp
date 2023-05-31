@@ -20,4 +20,5 @@ urlpatterns = [
         path('home/sticky_notes/', views.sticky_notes, name='sticky_notes'),
         path('home/profile_pic/', views.profile_pic, name='profile_pic'),
         path('home/messages/', views.send_task_reminder, name='send_task_reminder'),
+        path('home/calendar/', views.calendars, name='calendars')
 ]

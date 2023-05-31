@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+
+<div id='calendar'></div>
+
+<script>
+  $(document).ready(function() {
+    var events = [
+      {% for task in tasks %}
+        {
+          title: '{{ task.name }}',
+          start: '{{ task.due_date }}'
+        },
+      {% endfor %}
+    ];
+    $('#calendar').fullCalendar({
+      events: events
+    });
+  });
+</script>
+
+{% endblock content %}
+    
