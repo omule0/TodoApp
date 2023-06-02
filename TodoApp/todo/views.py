@@ -1,9 +1,7 @@
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.http import HttpResponse,JsonResponse, HttpResponse,HttpResponseRedirect
 from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect
-from django.http import JsonResponse, HttpResponse
 from .models import Task, List
 from .forms import TaskForm,ListForm
 from datetime import datetime, timedelta, timezone
@@ -11,7 +9,11 @@ from django.contrib import messages
 from django.utils import timezone
 from django.core.mail import send_mail
 from datetime import datetime
-# Create your views here.
+from django.utils.safestring import mark_safe
+from django.utils import timezone
+import calendar
+import datetime
+
 @login_required
 def sticky_notes(request):
     messages.success(request, (' Welcome to your sticky notes'))
@@ -112,8 +114,6 @@ def mark_skipped_tasks(request):
                     messages.error(request, ('There are no tasks to be marked as skipped!'))
         return redirect('home')'''
 
-
-
 from django.db.models import Q
 
 @login_required
@@ -199,17 +199,11 @@ def send_task_reminder(request):
     tasks = Task.objects.filter(completed=False, is_skipped=False)
     for task in tasks:
         time_delta = timezone.now() - task.created_at
-        if task.remind_minutes and time_delta.total_seconds() > task.remind_minutes * 60:
+        if task.remind_minutes and time_delta.total_seconds() >= task.remind_minutes * 60:
             task.save()
         else:
             messages.error(request, ('There are no tasks to send reminders for!'))
     return render(request,'messages.html' )
-
-
-from django.utils.safestring import mark_safe
-from django.utils import timezone
-import calendar #imports Python's built-in calendar module
-import datetime
 
 @login_required
 def calendars(request, year=None, month=None):
