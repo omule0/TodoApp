@@ -18,7 +18,7 @@ def sticky_notes(request):
     return render(request, 'sticky_notes.html')
 
 def landing_page(request):
-    return render(request, 'landing_page.html')
+    return render(request, 'Landing_page.html')
 
 @login_required
 def home(request):

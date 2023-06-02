@@ -7,11 +7,12 @@ from django.db import models
 class Task(models.Model):
     name = models.CharField(max_length=255)
     due_date = models.DateField(null=True, blank=True,default=timezone.now)
-    due_time = models.TimeField(null=True, blank=True,default=timezone.datetime.strptime("09:00", "%H:%M").time())
+    due_time = models.TimeField(null=True, blank=True,default=timezone.datetime.strptime("12:00", "%H:%M").time())
     created_at = models.DateTimeField(default=timezone.now)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     description = models.TextField(null=True, blank=True)
     completed = models.BooleanField(default=False)
+    email_sent = models.BooleanField(default=False)
     remind_minutes = models.IntegerField(default=0)
     is_skipped = models.BooleanField(default=False)
 

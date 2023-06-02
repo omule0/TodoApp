@@ -25,7 +25,8 @@ SECRET_KEY = 's6c&&_@@^xr&e1$3($cf-^j)r7gjp478!7t@09c(%ah-ue^55-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+CSRF_TRUSTED_ORIGINS = ['https://sdp-l45pybnoqq-uc.a.run.app']
 
 
 # Application definition
@@ -109,7 +110,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Africa/Kampala'
 
 USE_I18N = True
 
