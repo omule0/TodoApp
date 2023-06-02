@@ -5,15 +5,15 @@ from django.db import models
 
 
 class Task(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255,default='task')
     due_date = models.DateField(null=True, blank=True,default=timezone.now)
     due_time = models.TimeField(null=True, blank=True,default=timezone.datetime.strptime("12:00", "%H:%M").time())
     created_at = models.DateTimeField(default=timezone.now)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    description = models.TextField(null=True, blank=True)
+    description = models.TextField(null=True, blank=True,default='my todo task')
     completed = models.BooleanField(default=False)
     email_sent = models.BooleanField(default=False)
-    remind_minutes = models.IntegerField(default=0)
+    remind_minutes = models.IntegerField(default=5)
     is_skipped = models.BooleanField(default=False)
 
     def toggle_completed(self):
@@ -40,8 +40,8 @@ class List(models.Model):
     completed = models.BooleanField(default=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     date_created = models.DateTimeField(default=timezone.now)
-    due_time = models.TimeField(null=True, blank=True)
-    week_of = models.CharField(max_length=10, choices=DAY_CHOICES)
+    due_time = models.TimeField(null=True, blank=True,default=timezone.now)
+    week_of = models.CharField(max_length=10, choices=DAY_CHOICES,default='Monday')
     due_week = models.DateField()  
     
 
