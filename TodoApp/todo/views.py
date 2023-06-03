@@ -142,7 +142,7 @@ def weekly(request):
 
     total_weekly_tasks = weekly_tasks.count()
 
-    return render(request, 'weekly.html', {'lists': weekly_tasks, 'form': form, 'total_weekly_tasks': total_weekly_tasks})
+    return render(request, 'weekly.html', {'lists': weekly_tasks, 'form': form, 'total_weekly_tasks': total_weekly_tasks,'start_date': start_date,'end_date': end_date})
 
 def delete_old_weekly_tasks(request):
     # Calculate the date threshold for deleting old weekly tasks

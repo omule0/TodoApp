@@ -44,7 +44,6 @@ class List(models.Model):
     week_of = models.CharField(max_length=10, choices=DAY_CHOICES,default='Monday')
     due_week = models.DateField()  
     
-
     def __str__(self):
         return self.item
     
