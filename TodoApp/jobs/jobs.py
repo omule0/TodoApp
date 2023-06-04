@@ -8,8 +8,6 @@ from datetime import datetime, timedelta, timezone
 
 def send_reminder():
     tasks = Task.objects.filter(completed=False, is_skipped=False,email_sent=False)
-    sent_tasks = {}
-    
     for task in tasks:
         time_delta = datetime.now(timezone.utc) - task.created_at
         if task.remind_minutes and time_delta.total_seconds() > task.remind_minutes * 60:
@@ -24,7 +22,6 @@ def send_reminder():
                 fail_silently=False,
             )
             task.email_sent = True
-            sent_tasks[task.user.email] = True
             task.save()
 
 def mark_skipped_tasks():

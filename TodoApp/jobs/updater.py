@@ -4,8 +4,8 @@ from .jobs import send_reminder, mark_skipped_tasks,delete_old_tasks, delete_old
 
 def start():
     scheduler = BackgroundScheduler()
-    scheduler.add_job(send_reminder, 'interval', seconds=1)
-    scheduler.add_job(mark_skipped_tasks, 'interval', seconds=1)
+    scheduler.add_job(send_reminder, 'interval', seconds=5)
+    scheduler.add_job(mark_skipped_tasks, 'interval', seconds=5)
     scheduler.add_job(delete_old_tasks, 'interval', minutes=1)
     scheduler.add_job(delete_old_weekly_tasks, 'interval', days=1)
     scheduler.start()

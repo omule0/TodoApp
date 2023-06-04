@@ -13,6 +13,7 @@ from django.utils.safestring import mark_safe
 from django.utils import timezone
 import calendar
 import datetime
+from django.db.models import Q
 
 @login_required
 def sticky_notes(request):
@@ -114,12 +115,11 @@ def mark_skipped_tasks(request):
                     messages.error(request, ('There are no tasks to be marked as skipped!'))
         return redirect('home')'''
 
-from django.db.models import Q
+
 
 @login_required
 def weekly(request):
-    now = datetime.datetime.now(timezone.utc).date()  # Get the current date
-
+    now = timezone.now().date()
     if request.method == 'POST':
         form = ListForm(request.POST)
         if form.is_valid():
@@ -132,28 +132,27 @@ def weekly(request):
     else:
         form = ListForm()
 
-    # Calculate the start and end dates for the current week
-    start_date = now - timedelta(days=now.weekday())  # Get the start of the week (Monday)
-    end_date = start_date + timedelta(days=6)  # Get the end of the week (Sunday)
+    # Get the start and end of the week range for the current week
+    start_date = now - timedelta(days=now.weekday())
+    end_date = start_date + timedelta(days=6)
 
-    # Retrieve all weekly tasks for the current day of the week or tasks that have due dates within the current week
-    current_day = now.strftime('%A')
-    weekly_tasks = List.objects.filter(Q(week_of=current_day) | Q(due_week__range=[start_date, end_date]), user=request.user)
+    # Retrieve all weekly tasks for the current week
+    weekly_tasks = List.objects.filter(week_of__range=[start_date, end_date], user=request.user)
 
     total_weekly_tasks = weekly_tasks.count()
 
-    return render(request, 'weekly.html', {'lists': weekly_tasks, 'form': form, 'total_weekly_tasks': total_weekly_tasks,'start_date': start_date,'end_date': end_date})
-
+    return render(request, 'weekly.html', {'lists': weekly_tasks, 
+                                           'form': form, 
+                                           'total_weekly_tasks': total_weekly_tasks,
+                                           'start_date': start_date,
+                                           'end_date': end_date})
 def delete_old_weekly_tasks(request):
     # Calculate the date threshold for deleting old weekly tasks
-    threshold_date = datetime.datetime.now().date() - timedelta(days=7)  # Delete tasks older than 7 days
-
-    # Retrieve and delete the old weekly tasks
+    threshold_date = timezone.now().date() - timedelta(days=7)
     old_weekly_tasks = List.objects.filter(week_of__lt=threshold_date)
     old_weekly_tasks.delete()
-    messages.success(request, (' Old Weekly tasks have been deleted successfully!'))
-    # Redirect to a specific URL after deleting the tasks
-    return redirect('weekly')  # Replace 'weekly' with the appropriate URL name
+    messages.success(request, ('Old Weekly tasks have been deleted successfully!'))
+    return redirect('weekly')
 
 @login_required
 def deleteList(request, item_id):

@@ -34,22 +34,12 @@ class TaskForm(forms.ModelForm):
 
 class ListForm(forms.ModelForm):
     class Meta:
-        DAY_CHOICES = [
-    ('Monday', 'Monday'),
-    ('Tuesday', 'Tuesday'),
-    ('Wednesday', 'Wednesday'),
-    ('Thursday', 'Thursday'),
-    ('Friday', 'Friday'),
-    ('Saturday', 'Saturday'),
-    ('Sunday', 'Sunday'),
-]
         model = List
-        fields = ["item","due_time","due_week", "week_of"]
+        fields = ["item","due_time", "week_of"]
         widgets = {
             'item': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter task here'}),
             'due_time': forms.TimeInput(attrs={'type': 'time'}),
-            'due_week': forms.DateInput(attrs={'type': 'date'}),
-            'week_of': forms.Select(choices=DAY_CHOICES),
+            'week_of': forms.DateInput(attrs={'type': 'date'}),
         }
 
     def __init__(self, *args, **kwargs):
@@ -61,7 +51,6 @@ class ListForm(forms.ModelForm):
             Column(
                 Column('item'),
                 Column('due_time'),
-                Column('due_week'),
                 Column('week_of'),
                 css_class='form-row'
             ),
