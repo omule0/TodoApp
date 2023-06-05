@@ -1,5 +1,5 @@
  MY TO-DO APP
-
+project url = https://sdp-l45pybnoqq-uc.a.run.app
 DESCRIPTION:
 The app is a  task management tool that allows you to easily create, organize, and prioritize your daily and weekly tasks. With this app, you can set up an account and start creating your to-do list in just a few clicks. Keep track of all your chores, schedule them according to their expected date and time, and get notified when they are due using our reminder feature. 
 
@@ -19,6 +19,8 @@ Docker tag as per the docker hub repository name
 :docker tag sdp m3lv1n/sdp:sdp
 Login:docker login
 docker push to repository:docker push m3lv1n/sdp:sdp
+
+
 
 pip install django-background-tasks
 pip install apscheduler
