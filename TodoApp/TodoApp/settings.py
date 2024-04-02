@@ -26,8 +26,7 @@ SECRET_KEY = 's6c&&_@@^xr&e1$3($cf-^j)r7gjp478!7t@09c(%ah-ue^55-'
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['https://sdp-l45pybnoqq-uc.a.run.app']
-
+CSRF_TRUSTED_ORIGINS = ['https://*.sdp1-k45iyfda6q-uc.a.run.app','https://sdp1-k45iyfda6q-uc.a.run.app/']
 
 # Application definition
 
